@@ -1,6 +1,5 @@
 
-<!-- <img src="./banner.gif" width="1000" /> -->
-<img src="https://tenor.com/view/chilled-lamb-mienar-lofi-study-gif-21666282" width="1000" />
+<img src="./code.gif" width="1000" />
 
 ---
 
