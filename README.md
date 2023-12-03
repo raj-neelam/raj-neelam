@@ -3,7 +3,7 @@
 <div align="center">
 <img src="code.gif" width="1000"/>
 </div>
----
+
 <h3 align="center">I'm a self-taught ML and AI developer. I'm passionate about creating neural networks and reinforcement learning models using the latest technologies.</h3>
 
 ![](https://visitcount.itsvg.in/api?id=rajGaurav&label=Profile%20View%20Counter&color=0&icon=5&pretty=true)
@@ -20,7 +20,9 @@ i am intrested in collaboration and learning new things!
 # 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raj-neelam-80666920b/) 
 [![website](https://img.shields.io/badge/My%20Website%20-%20darkred?style=for-the-batch&logo=webflow)](https://itsraj.in/) 
-[![Static Badge](https://img.shields.io/badge/Instagram%20-%20purple?style=for-the-batch&logo=instagram)](https://www.instagram.com/raj_gaurav_7_/) 
+[![Instagram](https://img.shields.io/badge/Instagram%20-%20purple?style=for-the-batch&logo=instagram)](https://www.instagram.com/raj_gaurav_7_/) 
+[![twitter](https://img.shields.io/badge/Twitter-%20black?style=for-the-batch&logo=x)](https://twitter.com/RajNGaurav)
+
 
 <!-- ## 📫 How to Reach Me -->
 You can reach me via 📫 email at [singhggaurav14@gmail.com](mailto:singhggaurav14@gmail.com) or through my [LinkedIn](https://www.linkedin.com/in/raj-neelam-80666920b/) profile.
