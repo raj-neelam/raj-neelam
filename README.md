@@ -1,7 +1,7 @@
 
 <h1 align="center">Hi there, I'm Raj Gaurav 👋</h1>
 <div align="center">
-<img src="code.gif" width="1000"/>
+<img src="code2.gif" width="1000"/>
 </div>
 ---
 <h3 align="center">I'm a self-taught ML and AI developer. I'm passionate about creating neural networks and reinforcement learning models using the latest technologies.</h3>
