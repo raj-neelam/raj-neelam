@@ -6,7 +6,8 @@
 
 <h3 align="center">I'm a self-taught ML and AI developer. I'm passionate about creating neural networks and reinforcement learning models using the latest technologies.</h3>
 
-![](https://visitcount.itsvg.in/api?id=rajGaurav&label=Profile%20View%20Counter&color=0&icon=5&pretty=true)
+
+![](https://visitcount.itsvg.in/api?id=raj-neelam&label=Profile%20Views&color=9&icon=0&pretty=true)
 
 <hr>
 
