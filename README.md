@@ -14,53 +14,89 @@
 
 ### - 🌱 I'm currently learning ML and reinforcement learning to enhance my skills.
 ### - 💬 Ask me about PyTorch, Python, Tensorflow, openCV, Flutter
-### - ⚡ I'm currently working on Ludo AI. A a application that helps AI learn strategy to play the game more efectively.
+### - ⚡ I'm currently working on Ludo AI. An application that helps AI learn strategy to play the game more effectively.
 <hr>
 
-# 🌟 Fun Fact :- i am intrested in collaboration and learning new things!
+# 🌟 Fun Fact :- I am interested in collaboration and learning new things!
 
 # 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raj-neelam-80666920b/) 
-[![website](https://img.shields.io/badge/My%20Website%20-%20darkred?style=for-the-batch&logo=webflow)](https://itsraj.in/) 
+[![website](https://img.shields.io/badge/My%20Website%20-%20darkred?style=for-the-batch&logo=webflow)](https://rajgaurav.me/) 
 [![Instagram](https://img.shields.io/badge/Instagram%20-%20purple?style=for-the-batch&logo=instagram)](https://www.instagram.com/raj_gaurav_7_/) 
 [![twitter](https://img.shields.io/badge/Twitter-%20black?style=for-the-batch&logo=x)](https://twitter.com/RajNGaurav)
 
 <!-- ## 📫 How to Reach Me -->
-### You can reach me via 📫 email at [singhggaurav14@gmail.com](mailto:singhggaurav14@gmail.com) or through my [LinkedIn](https://www.linkedin.com/in/raj-neelam-80666920b/) profile.
+### You can reach me via 📫 email at [rajneelamgaueav@gmail.com](mailto:rajneelamgaueav@gmail.com) or through my [LinkedIn](https://www.linkedin.com/in/raj-neelam-80666920b/) profile.
 <hr>
 
 # 💻 Tech Stack:
-- ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) 
-![pytorch](https://img.shields.io/badge/pyTorch%20-black?style=for-the-badge&logo=pytorch)
-![tensorflow](https://img.shields.io/badge/tensorflow%20-gray?style=for-the-badge&logo=tensorflow)
-![Static Badge](https://img.shields.io/badge/numpy%20-black?style=for-the-badge&logo=numpy&logoColor=orange)
 
-
-
-
-- ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) 
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
- ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![django](https://img.shields.io/badge/Django-%20%23092E20?style=for-the-badge&logo=django)
-
-
-
-- ![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)  ![Dart](https://img.shields.io/badge/dart-%230175C2.svg?style=for-the-badge&logo=dart&logoColor=white) 
-![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) 
-![ANDROID](https://img.shields.io/badge/android-%2320232a.svg?style=for-the-badge&logo=android&logoColor=%a4c639) 
-
-- ![git](https://img.shields.io/badge/git%20-gray?style=for-the-badge&logo=git)
-![git hub](https://img.shields.io/badge/Github-%20%23303030?style=for-the-badge&logo=Github)
-![pandas](https://img.shields.io/badge/pandas%20-green?style=for-the-badge&logo=pandas&logoColor=black)
-![openCV](https://img.shields.io/badge/openCV%20-white?style=for-the-badge&logo=opencv&logoColor=red)
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Technologies</th>
+  </tr>
+  <tr>
+    <td>Core AI/ML Tools</td>
+    <td>
+      <img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54" alt="Python">
+      <img src="https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white" alt="PyTorch">
+      <img src="https://img.shields.io/badge/scikit--learn-%23F7931E.svg?style=for-the-badge&logo=scikit-learn&logoColor=white" alt="scikit-learn">
+      <img src="https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white" alt="Pandas">
+      <img src="https://img.shields.io/badge/OpenCV-%23white.svg?style=for-the-badge&logo=opencv&logoColor=red" alt="OpenCV">
+      <img src="https://img.shields.io/badge/Matplotlib-%23ffffff.svg?style=for-the-badge&logo=Matplotlib&logoColor=black" alt="Matplotlib">
+      <img src="https://img.shields.io/badge/LangChain-%2300A98F.svg?style=for-the-badge&logo=LangChain&logoColor=white" alt="LangChain">
+      <img src="https://img.shields.io/badge/n8n-%2300C4CC.svg?style=for-the-badge&logo=n8n&logoColor=white" alt="n8n">
+    </td>
+  </tr>
+  <tr>
+    <td>Visualization and Simulations</td>
+    <td>
+      <img src="https://img.shields.io/badge/Plotly-%233F4F75.svg?style=for-the-badge&logo=plotly&logoColor=white" alt="Plotly">
+      <img src="https://img.shields.io/badge/Pygame-%23FFCC00.svg?style=for-the-batch&logo=Pygame&logoColor=black" alt="Pygame">
+    </td>
+  </tr>
+  <tr>
+    <td>Web Development</td>
+    <td>
+      <img src="https://img.shields.io/badge/FastAPI-%2300C7B7.svg?style=for-the-badge&logo=FastAPI&logoColor=white" alt="FastAPI">
+      <img src="https://img.shields.io/badge/React-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React">
+      <img src="https://img.shields.io/badge/Node.js-%2343853D.svg?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js">
+      <img src="https://img.shields.io/badge/Docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+    </td>
+  </tr>
+  <tr>
+    <td>Collaboration and Deployment</td>
+    <td>
+      <img src="https://img.shields.io/badge/Git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+      <img src="https://img.shields.io/badge/GitHub-%23181717.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+      <img src="https://img.shields.io/badge/Heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white" alt="Heroku">
+    </td>
+  </tr>
+  <tr>
+    <td>Hardware and IoT</td>
+    <td>
+      <img src="https://img.shields.io/badge/Arduino-%2300979D.svg?style=for-the-badge&logo=arduino&logoColor=white" alt="Arduino">
+    </td>
+  </tr>
+  <tr>
+    <td>Other Tools</td>
+    <td>
+      <img src="https://img.shields.io/badge/PyAutoGUI-%23FF6F00.svg?style=for-the-badge&logo=python&logoColor=white" alt="PyAutoGUI">
+      <img src="https://img.shields.io/badge/Jupyter-%23F37626.svg?style=for-the-badge&logo=Jupyter&logoColor=white" alt="Jupyter">
+    </td>
+  </tr>
+</table>
 
 <hr>
 
 # 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=raj-neelam&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
-<br>
-
-![](https://github-readme-stats.vercel.app/api?username=raj-neelam&theme=radical&hide_border=false&include_all_commits=false&count_private=false)
-<br>
-
-![](https://github-readme-streak-stats.herokuapp.com/?user=raj-neelam&theme=radical&hide_border=false)
+<table>
+  <tr>
+    <td><img src="https://github-readme-stats.vercel.app/api/top-langs/?username=raj-neelam&theme=radical&hide_border=false&include_all_commits=false&count_private=false&layout=compact" alt="Top Languages"/></td>
+    <td><img src="https://github-readme-stats.vercel.app/api?username=raj-neelam&theme=radical&hide_border=false&include_all_commits=false&count_private=false" alt="GitHub Stats"/></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="https://github-readme-streak-stats.herokuapp.com/?user=raj-neelam&theme=radical&hide_border=false" alt="GitHub Streak"/></td>
+  </tr>
+</table>
