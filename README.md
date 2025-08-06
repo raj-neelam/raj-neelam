@@ -26,7 +26,7 @@
 [![twitter](https://img.shields.io/badge/Twitter-%20black?style=for-the-batch&logo=x)](https://twitter.com/RajNGaurav)
 
 <!-- ## 📫 How to Reach Me -->
-### You can reach me via 📫 email at [rajneelamgaueav@gmail.com](mailto:rajneelamgaueav@gmail.com) or through my [LinkedIn](https://www.linkedin.com/in/raj-neelam-80666920b/) profile.
+### You can reach me via 📫 email at [rajneelamgaurav@gmail.com](mailto:rajneelamgaurav@gmail.com) or through my [LinkedIn](https://www.linkedin.com/in/raj-neelam-80666920b/) profile.
 <hr>
 
 # 💻 Tech Stack:
