@@ -10,6 +10,8 @@
   <link rel="icon" href="assets/images/my-avatar.png" type="image/png">
 </head>
 <body>
+  <!-- Rising stars particle background (covers entire viewport) -->
+  <div class="stars-container" id="starsContainer" aria-hidden="true"></div>
   <div class="container">
     <!-- Sidebar -->
     <aside class="sidebar">
@@ -148,7 +150,7 @@
               <div class="timeline-date">2018 — 2021</div>
               <div class="timeline-title">DAV Pusauli, Kaimur, Bihar</div>
               <div class="timeline-content">
-                I completed my Matriculation from DAV Dhanupura, Ara, Bihar, acquiring a solid academic foundation to pursue further studies in technology and engineering.
+                I completed my Matriculation from DAV PGCL, Kaimur, Bihar, acquiring a solid academic foundation to pursue further studies of Computer Science.
               </div>
             </div>
           </div>
@@ -184,6 +186,18 @@
         <div class="card">
           <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Skills</h3>
           <div class="skills-grid">
+            <!-- Core -->
+            <div style="grid-column: 1 / -1; margin-bottom: 0.5rem; color: var(--text-secondary); font-weight: 600;">Core</div>
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">Machine Learning</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 80%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">80%</div>
+            </div>
+
             <div class="skill-item">
               <div>
                 <div class="skill-name">Python</div>
@@ -193,32 +207,59 @@
               </div>
               <div class="skill-percent">90%</div>
             </div>
+
             <div class="skill-item">
               <div>
-                <div class="skill-name">Machine Learning</div>
+                <div class="skill-name">Deep Learning</div>
                 <div class="skill-bar">
                   <div class="skill-fill" style="width: 75%"></div>
                 </div>
               </div>
               <div class="skill-percent">75%</div>
             </div>
+
+            <!-- Frameworks -->
+            <div style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); font-weight: 600;">Frameworks</div>
             <div class="skill-item">
               <div>
-                <div class="skill-name">Deep Learning</div>
+                <div class="skill-name">LangChain</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 70%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">70%</div>
+            </div>
+
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">PyTorch / TensorFlow</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 75%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">75%</div>
+            </div>
+
+            <!-- Extras -->
+            <div style="grid-column: 1 / -1; margin-top: 0.5rem; margin-bottom: 0.5rem; color: var(--text-secondary); font-weight: 600;">Extras</div>
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">Cloud &amp; Deployment</div>
                 <div class="skill-bar">
                   <div class="skill-fill" style="width: 60%"></div>
                 </div>
               </div>
               <div class="skill-percent">60%</div>
             </div>
+
             <div class="skill-item">
               <div>
-                <div class="skill-name">Cloud Computing</div>
+                <div class="skill-name">SQL &amp; Git</div>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width: 30%"></div>
+                  <div class="skill-fill" style="width: 70%"></div>
                 </div>
               </div>
-              <div class="skill-percent">30%</div>
+              <div class="skill-percent">70%</div>
             </div>
           </div>
         </div>
@@ -239,29 +280,39 @@
     // Helper for project cards (same logo logic as for repos)
     const myProjects = [
       {
-        name: 'Ludo AI',
-        url: 'https://github.com/raj-neelam/Ludo-Ai',
-        category: 'Reinforcement Learning',
+        name: 'Movie Recommendation System',
+        cover: 'Movie-Recommendation-System.png',
+        url: 'https://github.com/raj-neelam/movie-recommendation-system',
+        category: 'Machine Learning',
         icon: 'fas fa-gamepad'
       },
       {
         name: 'Digit Recognition',
         cover: 'Digit-Recognition.png',
         url: 'https://github.com/raj-neelam/Digit-Recognition',
-        category: 'Machine Learning',
+        category: 'Deep Learning',
         icon: 'fas fa-eye'
       },
       {
-        name: 'Linear Regression Visualizer',
-        url: 'https://github.com/raj-neelam/Visualize-Linear-Regression',
+        name: 'Neural Network Playground',
+        cover: 'Neural-Network-Playground.png',
+        url: 'https://github.com/raj-neelam/Neural-network-Visualizer',
+        category: 'Deep Learning',
+        icon: 'fas fa-chart-line'
+      },
+      {
+        name: 'Titanic Survival Prediction model',
+        cover: 'titanic-survival.png',
+        url: 'https://github.com/raj-neelam/titanic-survival',
         category: 'Machine Learning',
         icon: 'fas fa-chart-line'
       },
       {
-        name: 'Task Manager',
-        url: 'https://github.com/raj-neelam/gdse_app',
-        category: 'Applications',
-        icon: 'fas fa-tasks'
+        name: 'Linear Regression Visualizer',
+        cover: 'Visualize-Linear-Regression.png',
+        url: 'https://github.com/raj-neelam/Visualize-Linear-Regression',
+        category: 'Machine Learning',
+        icon: 'fas fa-chart-line'
       },
     ];
 
