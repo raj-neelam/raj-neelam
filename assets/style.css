@@ -23,7 +23,7 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
   line-height: 1.6;
@@ -43,7 +43,7 @@ body::before {
     radial-gradient(circle at 80% 80%, rgba(0, 204, 106, 0.1) 0%, transparent 50%),
     radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
   pointer-events: none;
-  z-index: -1;
+  z-index: -2;
 }
 
 /* Container */
@@ -55,6 +55,20 @@ body::before {
   grid-template-columns: 350px 1fr;
   gap: 2rem;
   min-height: 100vh;
+  position: relative;
+  z-index: 1; /* sit above particles */
+}
+
+/* Animated particles background (above radial gradient but under content) */
+.particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0; /* above body::before (-2) but below .container (1) */
+  overflow: hidden;
 }
 
 /* Sidebar */
@@ -88,10 +102,13 @@ body::before {
   box-shadow: 0 0 0 0 rgba(0,255,136,0.6), 0 0 0 0 rgba(0,204,106,0.4);
   transition: box-shadow 0.4s cubic-bezier(.4,2,.6,1), transform 0.3s cubic-bezier(.4,2,.6,1), width 0.3s, height 0.3s;
 }
-
+a{
+  /* remove underline  */
+  text-decoration: none;
+}
 .avatar-link:hover .avatar,
 .avatar:hover {
-  box-shadow: 0 0 50px rgba(0,255,136,0.7);
+  box-shadow: 0 0 30px 4px rgba(0,255,136,0.5);
   transform: scale(1.13);
   z-index: 2;
 }
@@ -125,10 +142,14 @@ body::before {
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.5rem 1rem;
-  /* background: rgba(0, 255, 136, 0.1); */
+  background: transparent;
   border-radius: 20px;
   border: 1px solid var(--accent);
   display: inline-block;
+}
+
+.title{
+  box-shadow: 0 0 100px 0px rgba(0,255,136,0.5), inset 0 0 60px 2px rgba(0,255,136,0.2);
 }
 
 
@@ -202,7 +223,6 @@ body::before {
 .nav {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem;
   background: var(--bg-card);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border);
@@ -289,6 +309,19 @@ body::before {
   font-size: 1.1rem;
   color: var(--text-secondary);
   margin-bottom: 2rem;
+}
+
+.about-text .lead {
+  font-size: 1.08rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.accent {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .services-grid {
@@ -455,7 +488,6 @@ body::before {
   overflow: hidden;
   transition: all 0.3s ease;
   position: relative;
-  group: hover;
 }
 
 .project-card:hover {
@@ -463,36 +495,74 @@ body::before {
   box-shadow: var(--shadow-lg);
 }
 
-.project-image {
-  height: 200px;
-  background: var(--gradient-card);
+
+/* Make cover image span the whole card and provide an overlay for text readability */
+.project-card {
+  min-height: 260px; /* ensures image area is visible */
   position: relative;
   overflow: hidden;
 }
 
-.project-image::before {
-  content: '';
+/* Cover image fills the entire card */
+.project-image {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: rgba(0, 255, 136, 0.2);
-  border-radius: 50%;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  overflow: hidden;
+  background: var(--gradient-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0; /* ensure image sits at the back */
+}
+
+.project-image img,
+.project-image span {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .project-image i {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
+  position: relative; /* center inside flex container */
+  font-size: 3rem;
   color: var(--accent);
+  z-index: 0; /* keep icon behind the overlay */
 }
 
 .project-content {
-  padding: 1.5rem;
+  padding: 1.25rem 1.5rem 1.6rem; /* slightly tighter top padding, more bottom space */
+  position: absolute; /* anchor content to bottom */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2; /* content sits above the overlay */
+  overflow: hidden;
+  pointer-events: none; /* allow clicks to pass through to link except text (children will be pointer-events:auto) */
+}
+
+/* Bottom-anchored left-to-right gradient banner: covers lower portion of the card */
+.project-content::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 90%; /* smaller bottom banner for clearer image visibility */
+  /* softer dark-to-transparent left->right gradient */
+  background: linear-gradient(90deg, rgba(102, 102, 102, 0.88) 0%, rgba(78, 78, 78, 0.6) 25%, rgba(41, 41, 41, 0.35) 50%, transparent 100%);
+  backdrop-filter: blur(3px);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  pointer-events: none;
+  z-index: 1; /* overlay sits above image but below content */
+}
+
+/* Ensure project text and controls render above the gradient overlay */
+.project-content > * {
+  position: relative;
+  z-index: 3; /* ensure text and controls are above the overlay */
+  pointer-events: auto; /* make text and links clickable */
 }
 
 .project-title {
@@ -620,6 +690,7 @@ body::before {
 
 .btn-primary {
   background: var(--gradient-primary);
+  margin-top: 1rem;
   border: none;
   color: var(--bg-primary);
   padding: 1rem 2rem;
@@ -650,7 +721,8 @@ body::before {
   width: 100%;
   height: 100%;
   border: none;
-  filter: invert(1) hue-rotate(180deg);
+  /* Render map in dark monochrome: stronger darkness */
+  filter: grayscale(1) contrast(1.05) brightness(0.5);
 }
 
 /* Responsive */

@@ -17,19 +17,21 @@
         });
       });
 
-      // Project filtering
-      const filterButtons = document.querySelectorAll('.filter-btn');
-      const projectCards = document.querySelectorAll('.project-card');
-
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
+      // Project filtering using event delegation so dynamically-created buttons work
+      const filterTabsContainer = document.getElementById('project-filter-tabs');
+      if (filterTabsContainer) {
+        filterTabsContainer.addEventListener('click', (e) => {
+          const button = e.target.closest('.filter-btn');
+          if (!button) return;
           const filter = button.getAttribute('data-filter');
-          
+
           // Remove active class from all filter buttons
-          filterButtons.forEach(btn => btn.classList.remove('active'));
+          const allBtns = filterTabsContainer.querySelectorAll('.filter-btn');
+          allBtns.forEach(btn => btn.classList.remove('active'));
           button.classList.add('active');
-          
-          // Filter project cards
+
+          // Query current project cards (handles dynamically rendered cards)
+          const projectCards = document.querySelectorAll('.project-card');
           projectCards.forEach(card => {
             if (filter === 'all' || card.getAttribute('data-category') === filter) {
               card.style.display = 'block';
@@ -39,7 +41,7 @@
             }
           });
         });
-      });
+      }
 
       // Form submission
       const contactForm = document.querySelector('.contact-form form');
@@ -124,10 +126,9 @@
         setTimeout(typeWriter, 1000);
       }
 
-      // Add floating animation to cards
+      // Card hover interactions (no continuous float animation)
       const cards = document.querySelectorAll('.card, .project-card, .service-card');
-      cards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
+      cards.forEach((card) => {
         card.addEventListener('mouseenter', function() {
           this.style.transform = 'translateY(-10px) scale(1.02)';
         });
@@ -188,17 +189,111 @@
         color: var(--accent);
       }
       
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-5px); }
-      }
-      
-      .card, .project-card, .service-card {
-        animation: float 6s ease-in-out infinite;
-      }
-      
-      .card:nth-child(2n) { animation-delay: -3s; }
-      .project-card:nth-child(2n) { animation-delay: -2s; }
-      .service-card:nth-child(2n) { animation-delay: -1s; }
+      /* Floating animation removed — cards will respond only to hover */
     `;
     document.head.appendChild(additionalStyles);
+    
+    // Fetch and display GitHub repos in My Work section
+    async function getRepos(username) {
+      const response = await fetch(`https://api.github.com/users/${username}/repos`);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      return await response.json();
+    }
+
+
+    async function fetchFirstIconFor(word) {
+      const endpoint = `https://api.iconify.design/search?query=${encodeURIComponent(word)}&limit=1`;
+      const response = await fetch(endpoint);
+      if (!response.ok) {
+        throw new Error(`Search request failed with status ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.icons && data.icons.length > 0) {
+        return `https://api.iconify.design/${data.icons[0]}.svg`;
+      } else {
+        // Fallback if no icons found
+        return `https://api.iconify.design/mdi:help-circle.svg`;
+      }
+    }
+
+    async function getLogoForRepo(repoName) {
+      const firstWord = repoName.split(/[-_\s]/)[0].toLowerCase();
+      try {
+      const iconUrl = await fetchFirstIconFor(firstWord);
+    // Use CSS mask to apply --accent color as the logo color
+    return `<span style="display:inline-block;width:56px;height:56px;background:var(--accent);border-radius:12px;box-shadow:0 0 8px 0 rgba(0,255,136,0.15);mask:url('${iconUrl}') center/contain no-repeat;-webkit-mask:url('${iconUrl}') center/contain no-repeat;"></span>`;
+      } catch {
+        return '<i class="fab fa-github"></i>';
+      }
+    }
+
+    async function createRepoCard(repo) {
+      const logo = await getLogoForRepo(repo.name);
+      return `
+        <div class="blog-card">
+          <div class="blog-image" style="background: var(--gradient-card); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent);">
+            ${logo}
+          </div>
+          <div class="blog-content">
+            <div class="blog-meta">${repo.language ? repo.language : 'Repo'}</div>
+            <h3><a href="${repo.html_url}" target="_blank" style="color: var(--accent); text-decoration: none;">${repo.name}</a></h3>
+            <p class="blog-excerpt">${repo.description ? repo.description : ''}</p>
+            <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+              ★ ${repo.stargazers_count} &nbsp; ⑂ ${repo.forks_count}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+    // Dynamically scan assets/images/ for logo files and store in window.repoLogos
+    async function scanRepoLogos() {
+      // Try to fetch the directory listing (works if server allows it)
+      let files = [];
+      try {
+        const resp = await fetch('assets/images/');
+        if (resp.ok) {
+          const text = await resp.text();
+          // Parse for hrefs to images (works for Apache/nginx directory listing)
+          const matches = Array.from(text.matchAll(/href=["']([^"']+\.(?:png|jpg|svg))["']/gi));
+          files = matches.map(m => 'assets/images/' + m[1]);
+        }
+      } catch (e) {
+        // fallback: try some common names
+        files = [
+          'assets/images/linear-reg.jpg',
+          'assets/images/ludo_board.jpg',
+          'assets/images/mnist-min.png',
+          'assets/images/logo-1-color.png',
+          'assets/images/logo-2-color.png',
+          'assets/images/logo-3-color.png',
+          'assets/images/logo-4-color.png',
+          'assets/images/logo-5-color.png',
+          'assets/images/logo-6.png',
+          'assets/images/logo.svg',
+        ];
+      }
+      window.repoLogos = files;
+    }
+
+    async function loadRepos() {
+      const container = document.getElementById('github-repos');
+      try {
+        // Wait for repoLogos to be ready
+        if (!window.repoLogos) await scanRepoLogos();
+        const repos = await getRepos('raj-neelam');
+        // Fully sort repositories by stargazers_count (descending), then by name
+        repos.sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0) || a.name.localeCompare(b.name));
+        const cardHtmlArr = await Promise.all(repos.map(createRepoCard));
+        container.innerHTML = cardHtmlArr.join('');
+      } catch (err) {
+        container.innerHTML = `<div style=\"color: var(--accent); padding: 2rem;\">Could not load repositories.</div>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', async function() {
+      await scanRepoLogos();
+      loadRepos();
+    });
+  
