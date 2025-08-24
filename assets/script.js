@@ -296,4 +296,83 @@
       await scanRepoLogos();
       loadRepos();
     });
+
+
+// Rising stars particle field: creates upward-moving glowing dots behind content
+class StarField {
+  constructor() {
+    this.container = document.getElementById('starsContainer');
+    if (!this.container) return;
+    this.stars = [];
+    this.maxStars = 50;
+    this.init();
+  }
+
+  init() {
+    this.createInitialStars();
+    // The stars recreate themselves when they finish their animation
+  }
+
+  createInitialStars() {
+    for (let i = 0; i < this.maxStars; i++) {
+      setTimeout(() => {
+        this.createStar(true);
+      }, Math.random() * 5000);
+    }
+  }
+
+  createStar(isInitial = false) {
+    const star = document.createElement('div');
+    star.className = 'star';
+
+    const sizes = ['small', 'medium', 'large', 'extra-large'];
+    const size = sizes[Math.floor(Math.random() * sizes.length)];
+    star.classList.add(size);
+
+    if (Math.random() < 0.3) star.classList.add('pulse');
+
+    const startX = Math.random() * 100;
+    star.style.left = startX + '%';
+
+    if (isInitial) {
+      const startY = Math.random() * 100;
+      star.style.top = startY + '%';
+    } else {
+      star.style.top = '100vh';
+    }
+
+    const moveY = -120 - Math.random() * 80; // -120 to -200 vh
+    const duration = 16 + Math.random() * 14; // 16-30s
+    star.style.animationDuration = duration + 's';
+    star.style.setProperty('--move-y', moveY + 'vh');
+    star.style.transform = 'translateY(0)';
+    star.style.animation = `rise ${duration}s linear infinite, move ${duration}s linear infinite`;
+
+    this.container.appendChild(star);
+    this.stars.push(star);
+
+    // Remove and recreate after duration
+    setTimeout(() => {
+      if (star && star.parentNode) {
+        star.parentNode.removeChild(star);
+        this.stars = this.stars.filter(s => s !== star);
+        this.createStar(false);
+      }
+    }, duration * 1000);
+  }
+}
+
+// Inject vertical movement keyframes
+const _starStyle = document.createElement('style');
+_starStyle.textContent = `
+@keyframes move {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(var(--move-y, -120vh)); }
+}
+`;
+document.head.appendChild(_starStyle);
+
+document.addEventListener('DOMContentLoaded', () => {
+  try { new StarField(); } catch (e) { /* fail silently */ }
+});
   
