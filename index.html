@@ -1,1101 +1,442 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raj Gaurav Portfolio</title>
-
-  <!--
-    - favicon
-  -->
-  <link rel="shortcut icon" href="./assets/images/avatar-1.png" type="image/x-icon">
-
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
-
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <title>Raj Gaurav - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="assets/images/my-avatar.png" type="image/png">
 </head>
-
 <body>
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="profile">
+        <a href="https://github.com/raj-neelam" target="_blank" class="avatar-link">
+          <div class="avatar">
+            <img src="https://github.com/raj-neelam.png" alt="">
+          </div>
+        </a>
+        <h1>Raj Gaurav</h1>
+        <div class="title">AI/ML Researcher</div>
+      </div>
 
-  <!--
-    - #MAIN
-  -->
-
-  <main>
-
-    <!--
-      - #SIDEBAR
-    -->
-
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Raj Gaurav" width="80">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Raj Gaurav">Raj Gaurav</h1>
-
-          <p class="title">AI/ML Researcher</p>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:rajneelamgaurav@gmail.com">rajneelamgaurav@gmail.com</a>
         </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+916206295560">+91 6206295560</a>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-calendar"></i>
+          <span>July 14, 2003</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Roorkee, Uttrakhand, India</span>
+        </div>
       </div>
 
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:singhggaurav14@gmail.com" class="contact-link">singhggaurav14@gmail.com</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-
-              <a href="tel:+916206295560" class="contact-link">+91 6206295560</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-
-              <time datetime="1982-06-23">July 14, 2003</time>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>Roorkee, Uttrakhand, India</address>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="discord.com/users/rajneelamgaurav" target="_blank" class="social-link">
-              <ion-icon name="logo-discord"></ion-icon>
-            </a>
-          </li>
-          
-          <li class="social-item">
-            <a href="https://github.com/raj-neelam" target="_blank" class="social-link">
-              <ion-icon name="logo-github"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="www.linkedin.com/in/raj-neelam-gaurav" target="_blank" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-          <li class="social-item">
-            <a href="https://www.instagram.com/raj_gaurav_7_/" target="_blank" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
+      <div class="social-links">
+        <a href="https://discord.com/users/rajneelamgaurav" target="_blank">
+          <i class="fab fa-discord"></i>
+        </a>
+        <a href="https://github.com/raj-neelam" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/raj-neelam-gaurav" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.instagram.com/raj_gaurav_7_/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
       </div>
-
     </aside>
 
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar">
-
-        <ul class="navbar-list">
-
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Projects</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
-          </li>
-
-        </ul>
-
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Navigation -->
+      <nav class="nav">
+        <button class="nav-btn active" data-section="about">About</button>
+        <button class="nav-btn" data-section="resume">Resume</button>
+        <button class="nav-btn" data-section="projects">Projects</button>
+        <button class="nav-btn" data-section="mywork">My Work</button>
+        <button class="nav-btn" data-section="contact">Contact</button>
       </nav>
 
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about">
-
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-            I'm an AI enthusiast and aspiring researcher from India
-             who loves solving challenging problems with creative solutions. 
-             I work on things like reinforcement learning, deep learning, 
-             and building AI tools that are useful and impactful.
-          </p>
-
-          <p>
-            I enjoy combining technical skills with fresh ideas to create 
-            smart systems and share what I learn with others. 
-            My goal is to keep growing as a professional while contributing 
-            to the exciting world of AI.
-          </p>
-        </section>
-
-
-        <!--
-          - service
-        -->
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What i'm doing</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Artificial Intelligence</h4>
-
-                <p class="service-item-text">
-                  Building AI systems to solve real-world challenges using machine learning and deep learning.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Reinforcement Learning</h4>
-
-                <p class="service-item-text">
-                  Training AI models to make smart decisions in dynamic environments.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Custom Solutions</h4>
-
-                <p class="service-item-text">
-                  Creating AI-powered tools tailored to practical needs.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Knowledge Sharing</h4>
-
-                <p class="service-item-text">
-                  Simplifying AI concepts through workshops and talks.
-                </p>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials
-        -->
-
-        <!-- this section was hidden -->
-        <section class="testimonials" style="display: none;"> 
-
-          <h3 class="h3 testimonials-title">Testimonials</h3>
-
-          <ul class="testimonials-list has-scrollbar">
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Daniel lewis</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-2.png" alt="Jessica miller" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Jessica miller</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-3.png" alt="Emily evans" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Emily evans</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-            <li class="testimonials-item">
-              <div class="content-card" data-testimonials-item>
-
-                <figure class="testimonials-avatar-box">
-                  <img src="./assets/images/avatar-4.png" alt="Henry william" width="60" data-testimonials-avatar>
-                </figure>
-
-                <h4 class="h4 testimonials-item-title" data-testimonials-title>Henry william</h4>
-
-                <div class="testimonials-text" data-testimonials-text>
-                  <p>
-                    Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                    lot of experience
-                    and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                    consectetur adipiscing
-                    elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                  </p>
-                </div>
-
-              </div>
-            </li>
-
-          </ul>
-
-        </section>
-
-
-        <!--
-          - testimonials modal
-        -->
-
-        <div class="modal-container" data-modal-container>
-
-          <div class="overlay" data-overlay></div>
-
-          <section class="testimonials-modal">
-
-            <button class="modal-close-btn" data-modal-close-btn>
-              <ion-icon name="close-outline"></ion-icon>
-            </button>
-
-            <div class="modal-img-wrapper">
-              <figure class="modal-avatar-box">
-                <img src="./assets/images/avatar-1.png" alt="Daniel lewis" width="80" data-modal-img>
-              </figure>
-
-              <img src="./assets/images/icon-quote.svg" alt="quote icon">
-            </div>
-
-            <div class="modal-content">
-
-              <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
-
-              <time datetime="2021-06-14">14 June, 2021</time>
-
-              <div data-modal-text>
-                <p>
-                  Richard was hired to create a corporate identity. We were very pleased with the work done. She has a
-                  lot of experience
-                  and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt
-                  consectetur adipiscing
-                  elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.
-                </p>
-              </div>
-
-            </div>
-
-          </section>
-
+      <!-- About Section -->
+      <section class="section active" id="about">
+        <h2 class="section-title">About Me</h2>
+        
+        <div class="card">
+          <div class="about-text">
+            <p class="lead">I’m Raj Gaurav — an AI/ML engineer passionate about building intelligent systems that actually work in the real world. My focus lies in machine learning, deep learning, and generative AI, where I transform raw ideas into scalable, impactful solutions.</p>
+
+            <p>My work spans end-to-end model development, from data pipelines and training to deployment and integration. I have hands-on experience with neural networks (CNNs, RNNs, Transformers), reinforcement learning, and agentic AI frameworks like LangChain and LangGraph. Beyond research, I focus on reproducibility, rapid prototyping, and building automation pipelines that bring AI closer to real-world use cases.</p>
+          </div>
         </div>
 
-
-        <!--
-          - clients
-        -->
-        <!-- this section was hidden -->
-        <section class="clients" style="display: none;">
-
-          <h3 class="h3 clients-title">Clients</h3>
-
-          <ul class="clients-list has-scrollbar">
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-1-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-2-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-3-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-4-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-5-color.png" alt="client logo">
-              </a>
-            </li>
-
-            <li class="clients-item">
-              <a href="#">
-                <img src="./assets/images/logo-6-color.png" alt="client logo">
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #RESUME
-      -->
-
-      <article class="resume" data-page="resume">
-
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
+        <div class="card">
+          <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">What I'm Doing</h3>
+          <div class="services-grid">
+            <div class="service-card">
+              <i class="fas fa-brain"></i>
+              <h3>Artificial Intelligence</h3>
+              <p>Designing and training models for perception, prediction, and decision-making across real-world problems.</p>
             </div>
 
-            <h3 class="h3">Education</h3>
+            <div class="service-card">
+              <i class="fas fa-gamepad"></i>
+              <h3>Reinforcement Learning</h3>
+              <p>Developing reward-driven agents and environments to learn robust policies for sequential decision tasks.</p>
+            </div>
+
+            <div class="service-card">
+              <i class="fas fa-magic"></i>
+              <h3>Generative AI</h3>
+              <p>Building and fine-tuning models that create text, images, and audio—focused on quality, alignment, and useful applications.</p>
+            </div>
+
+            <div class="service-card">
+              <i class="fas fa-robot"></i>
+              <h3>Agentic AI &amp; Automation</h3>
+              <p>Composing autonomous agents and automated pipelines that perform multi-step actions to solve tasks end-to-end.</p>
+            </div>
+
+            <div class="service-card">
+              <i class="fas fa-cogs"></i>
+              <h3>Custom Solutions</h3>
+              <p>Engineering end-to-end ML systems: data pipelines, model training, and lightweight deployments tailored to product needs.</p>
+            </div>
+
+            <div class="service-card">
+              <i class="fas fa-share-alt"></i>
+              <h3>Knowledge Sharing</h3>
+              <p>Teaching and mentoring through workshops, clear documentation, and practical demos that make complex ideas accessible.</p>
+            </div>
           </div>
+        </div>
+      </section>
 
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Quantum University School of Technology</h4>
-
-              <span>2023 — 2027</span>
-
-              <p class="timeline-text">
+      <!-- Resume Section -->
+      <section class="section" id="resume">
+        <h2 class="section-title">Resume</h2>
+        
+        <div class="card">
+          <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Education</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2023 — 2027</div>
+              <div class="timeline-title">Quantum University School of Technology</div>
+              <div class="timeline-content">
                 I earned my Bachelor's degree in B.Tech (CSE) with a specialization in Artificial Intelligence and Machine Learning from Quantum University, Roorkee, Uttarakhand.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">DAV Dhanupura, Ara, Bihar</h4>
-
-              <span>2021 — 2023</span>
-
-              <p class="timeline-text">
-                I completed my Intermediate with a focus on Science from DAV Dhanupura, Ara, Bihar, laying a strong foundation for my higher education in technology and engineering. This was also the time i learned Python Programming.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">DAV Pusauli, Kaimur, Bihar</h4>
-
-              <span>2018 — 2021</span>
-
-              <p class="timeline-text">
-                I completed my Matriculation from DAV Dhanupura, Ara, Bihar, acquiring a solid academic foundation to pursue further studies in the field of technology and engineering.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
+              </div>
             </div>
-
-            <h3 class="h3">Experience</h3>
+            <div class="timeline-item">
+              <div class="timeline-date">2021 — 2023</div>
+              <div class="timeline-title">DAV Dhanupura, Ara, Bihar</div>
+              <div class="timeline-content">
+                I completed my Intermediate with a focus on Science from DAV Dhanupura, Ara, Bihar, laying a strong foundation for my higher education in technology and engineering.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2018 — 2021</div>
+              <div class="timeline-title">DAV Pusauli, Kaimur, Bihar</div>
+              <div class="timeline-content">
+                I completed my Matriculation from DAV Dhanupura, Ara, Bihar, acquiring a solid academic foundation to pursue further studies in technology and engineering.
+              </div>
+            </div>
           </div>
+        </div>
 
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Core Team Member, Google Developer Group (GDG)</h4>
-
-              <span>2025 — Present</span>
-
-              <p class="timeline-text">
-                As a Core Team Member of Google Developer Group (GDG), 
-                I taught hundreds of students about generative AI and cloud technologies through workshops and lectures. 
-                I also played a key role in organizing international hackathons.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">University Projects and Research</h4>
-
-              <span>2023 — 2024</span>
-
-              <p class="timeline-text">
+        <div class="card">
+          <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Experience</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-date">2025 — Present</div>
+              <div class="timeline-title">Core Team Member, Google Developer Group (GDG)</div>
+              <div class="timeline-content">
+                As a Core Team Member of Google Developer Group (GDG), I taught hundreds of students about generative AI and cloud technologies through workshops and lectures. I also played a key role in organizing international hackathons.
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2023 — 2024</div>
+              <div class="timeline-title">University Projects and Research</div>
+              <div class="timeline-content">
                 Conducted research on AI-based systems, such as deepfake detection using deep learning techniques and neural networks.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Skills Development</h4>
-
-              <span>2021 — 2023</span>
-
-              <p class="timeline-text">
-                Worked on developing a variety of coding skills, including C, Python, and, javascript, alongside advanced topics like cloud computing, Macihne Learning and Deep Learning.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">My skills</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Python</h5>
-                <data value="90">90%</data>
               </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Machine Learning</h5>
-                <data value="75">75%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 75%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Deep Learning</h5>
-                <data value="60">60%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 60%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Cloud Computing</h5>
-                <data value="30">30%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 30%;"></div>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #PORTFOLIO
-      -->
-
-      <article class="portfolio" data-page="projects">
-
-        <header>
-          <h2 class="h2 article-title">Projects</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Machine learning</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Applications</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Reinforcement learning</button>
-            </li>
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Machine learning</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Applications</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Reinforcement learning</button>
-              </li>
-
-            </ul>
-
-          </div>
-
-          <ul class="project-list">
-
-            
-            <li class="project-item  active" data-filter-item data-category="reinforcement learning">
-              <a href="https://github.com/raj-neelam/Ludo-Ai" target="_blank">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/ludo_board.jpg" alt="Ludo Ai" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Ludo AI</h3>
-
-                <p class="project-category">Reinforcement  Learning</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="machine learning">
-              <a href="https://github.com/raj-neelam/Digit-Recognition" target="_blank">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/mnist-min.png" alt="Digit-Recognition" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Digit-Recognition</h3>
-
-                <p class="project-category">Machine Learning</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="machine learning">
-              <a href="https://github.com/raj-neelam/Visualize-Linear-Regression", target="_blank">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/linear-reg.jpg" alt="Linear Regression Visualizer" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Linear Regression Visualizer</h3>
-
-                <p class="project-category">Machine Learning</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="https://github.com/raj-neelam/gdse_app" target="_blank">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Task Manager</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog" data-page="blog">
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design conferences in 2022</h3>
-
-                  <p class="blog-text">
-                    Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
-
-                  <p class="blog-text">
-                    Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #80</h3>
-
-                  <p class="blog-text">
-                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
-
-                  <p class="blog-text">
-                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                  <p class="blog-text">
-                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact">
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55361.614822005315!2d77.85362601237544!3d29.86136305384657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eb36e08b35119%3A0x798f5dc25ebd0a72!2sRoorkee%2C%20Uttarakhand!5e0!3m2!1sen!2sin!4v1736681777777!5m2!1sen!2sin" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-          </figure>
-        </section>
-
-        <section class="contact-form">
-
-          <h3 class="h3 form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form>
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
             </div>
+            <div class="timeline-item">
+              <div class="timeline-date">2021 — 2023</div>
+              <div class="timeline-title">Skills Development</div>
+              <div class="timeline-content">
+                Worked on developing a variety of coding skills, including C, Python, and JavaScript, alongside advanced topics like cloud computing, Machine Learning and Deep Learning.
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+        <div class="card">
+          <h3 style="margin-bottom: 2rem; font-size: 1.5rem;">Skills</h3>
+          <div class="skills-grid">
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">Python</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 90%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">90%</div>
+            </div>
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">Machine Learning</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 75%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">75%</div>
+            </div>
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">Deep Learning</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 60%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">60%</div>
+            </div>
+            <div class="skill-item">
+              <div>
+                <div class="skill-name">Cloud Computing</div>
+                <div class="skill-bar">
+                  <div class="skill-fill" style="width: 30%"></div>
+                </div>
+              </div>
+              <div class="skill-percent">30%</div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
+      <!-- Projects Section -->
+      <section class="section" id="projects">
+        <h2 class="section-title">Projects</h2>
+        
+        <div class="filter-tabs" id="project-filter-tabs">
+          <!-- Filter buttons are generated dynamically from project categories -->
+        </div>
 
-          </form>
+        <div class="projects-grid" id="my-projects-grid">
+          <!-- Project cards will be rendered here by JS -->
+        </div>
+  <script>
+    // Helper for project cards (same logo logic as for repos)
+    const myProjects = [
+      {
+        name: 'Ludo AI',
+        url: 'https://github.com/raj-neelam/Ludo-Ai',
+        category: 'Reinforcement Learning',
+        icon: 'fas fa-gamepad'
+      },
+      {
+        name: 'Digit Recognition',
+        cover: 'Digit-Recognition.png',
+        url: 'https://github.com/raj-neelam/Digit-Recognition',
+        category: 'Machine Learning',
+        icon: 'fas fa-eye'
+      },
+      {
+        name: 'Linear Regression Visualizer',
+        url: 'https://github.com/raj-neelam/Visualize-Linear-Regression',
+        category: 'Machine Learning',
+        icon: 'fas fa-chart-line'
+      },
+      {
+        name: 'Task Manager',
+        url: 'https://github.com/raj-neelam/gdse_app',
+        category: 'Applications',
+        icon: 'fas fa-tasks'
+      },
+    ];
 
-        </section>
+    function getLogoForProject(name) {
+      const firstWord = name.split(/[-_\s]/)[0];
+      const exts = ['png', 'jpg', 'svg'];
+      for (const ext of exts) {
+        const path = `assets/images/${firstWord.toLowerCase()}.${ext}`;
+        if (window.repoLogos && window.repoLogos.includes(path)) {
+          return `<img src="${path}" alt="${firstWord} logo" style="width:100%;height:100%;object-fit:contain;">`;
+        }
+      }
+      return null;
+    }
 
-      </article>
+    // For project cards: check ONLY for an exact PNG named after project.repo
+    // (e.g. assets/images/Digit-Recognition.png). If present, use it; otherwise
+    // fall back to the existing first-word lookup.
+    function getProjectLogo(project) {
+      // Derive repo name from the project's URL (last path segment)
+      let repoName = null;
+      try {
+        const parts = project.url.split('/').filter(Boolean);
+        repoName = parts.length ? parts[parts.length - 1] : null;
+      } catch (e) {
+        repoName = null;
+      }
+      if (repoName) {
+        const path = `assets/images/${repoName}.png`;
+        if (window.repoLogos && window.repoLogos.includes(path)) {
+          return `<img src="${path}" alt="${repoName} logo" style="width:100%;height:100%;object-fit:contain;">`;
+        }
+      }
+      // fallback to previous behavior (first word of project name)
+      return getLogoForProject(project.name);
+    }
 
-    </div>
+    // Build filter buttons dynamically from project categories so new categories
+    // automatically appear in the UI when projects are added.
+    function normalizeCategory(cat) {
+      return (cat || '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9\-]/g, '');
+    }
 
-  </main>
+    function generateProjectFilters() {
+      const container = document.getElementById('project-filter-tabs');
+      if (!container) return;
+      const categories = Array.from(new Set(myProjects.map(p => p.category || 'Other')));
+      container.innerHTML = '';
+      // Add 'All' button
+      const allBtn = document.createElement('button');
+      allBtn.className = 'filter-btn active';
+      allBtn.setAttribute('data-filter', 'all');
+      allBtn.textContent = 'All';
+      container.appendChild(allBtn);
+      // Add category buttons
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn';
+        btn.setAttribute('data-filter', normalizeCategory(cat));
+        btn.textContent = cat;
+        container.appendChild(btn);
+      });
+    }
 
+    // New: prefer an explicit `cover` attribute on project objects.
+    // If `project.cover` is provided it can be either a filename (e.g. "name.png")
+    // or a path (e.g. "assets/images/name.png"). We try to load the image using
+    // an Image object (so we don't depend on scanRepoLogos). Returns a Promise
+    // that resolves to an <img> HTML string or null.
+    function imageExists(path) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = path;
+      });
+    }
 
+    async function getCoverImage(project) {
+      if (!project.cover) return null;
+      const cover = project.cover;
+      const path = cover.includes('/') ? cover : `assets/images/${cover}`;
+      const ok = await imageExists(path);
+      if (ok) return `<img src="${path}" alt="${project.name} cover" style="width:100%;height:100%;object-fit:cover;">`;
+      return null;
+    }
 
+    async function createProjectCard(project) {
+      // Prefer explicit cover image, then repo-specific PNG, then first-word icon
+      const coverHtml = await getCoverImage(project);
+      const logo = coverHtml || getProjectLogo(project);
+      const dataCat = normalizeCategory(project.category || '');
+      return `
+        <div class="project-card" data-category="${dataCat}">
+          <div class="project-image">
+            ${logo ? logo : `<i class="${project.icon}"></i>`}
+          </div>
+          <a href="${project.url}" target="_blank" class="project-link">
+            <i class="fas fa-external-link-alt"></i>
+          </a>
+          <div class="project-content">
+            <h3 class="project-title">${project.name}</h3>
+            <div class="project-category">${project.category}</div>
+          </div>
+        </div>
+      `;
+    }
 
+    async function renderMyProjects() {
+      // Wait for repoLogos to be ready (optional)
+      if (!window.repoLogos) await scanRepoLogos();
+      const grid = document.getElementById('my-projects-grid');
+      const cardHtmlArr = await Promise.all(myProjects.map(createProjectCard));
+      grid.innerHTML = cardHtmlArr.join('');
+    }
 
+    // Generate filters immediately (so other scripts can bind listeners on DOMContentLoaded)
+    generateProjectFilters();
 
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js"></script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      await renderMyProjects();
+    });
+  </script>
+      </section>
 
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      <!-- My Work Section -->
+      <section class="section" id="mywork">
+        <h2 class="section-title">My Work</h2>
+        <div id="github-repos" class="blog-grid">
+          <!-- GitHub repos will be loaded here -->
+        </div>
+      </section>
 
+      <!-- Contact Section -->
+      <section class="section" id="contact">
+        <h2 class="section-title">Contact</h2>
+        
+        <div class="contact-grid">
+          <div class="contact-form">
+            <h3 style="margin-bottom: 1.5rem;">Send Message</h3>
+            <form>
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+              </div>
+              <button type="submit" class="btn-primary">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+              </button>
+            </form>
+          </div>
+          
+          <div>
+            <h3 style="margin-bottom: 1.5rem;">Get In Touch</h3>
+            <div class="map-container">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55361.614822005315!2d77.85362601237544!3d29.86136305384657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390eb36e08b35119%3A0x798f5dc25ebd0a72!2sRoorkee%2C%20Uttarakhand!5e0!3m2!1sen!2sin!4v1736681777777!5m2!1sen!2sin" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/script.js"></script>
 </body>
-
 </html>
