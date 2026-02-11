@@ -21,7 +21,7 @@
 
 # 🌐 Socials:
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/raj-neelam-80666920b/) 
-[![website](https://img.shields.io/badge/My%20Website%20-%20darkred?style=for-the-batch&logo=webflow)](https://rajgaurav.me/) 
+[![website](https://img.shields.io/badge/My%20Website%20-%20darkred?style=for-the-batch&logo=webflow)](https://rajgaurav.site/) 
 [![Instagram](https://img.shields.io/badge/Instagram%20-%20purple?style=for-the-batch&logo=instagram)](https://www.instagram.com/raj_gaurav_7_/) 
 [![twitter](https://img.shields.io/badge/Twitter-%20black?style=for-the-batch&logo=x)](https://twitter.com/RajNGaurav)
 
