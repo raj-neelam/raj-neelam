@@ -1,378 +1,723 @@
-    // Navigation functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const navButtons = document.querySelectorAll('.nav-btn');
-      const sections = document.querySelectorAll('.section');
+/* ══════════════════════════════════════════════════════
+   script.js — reads ALL data from config.js
+   Theme · Cursor · Canvas · Top Nav · Tilt · Glow
+   Typed · Counters · Reveal · Projects · Repos
+   ══════════════════════════════════════════════════════ */
+'use strict';
 
-      navButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          const targetSection = button.getAttribute('data-section');
-          
-          // Remove active class from all nav buttons and sections
-          navButtons.forEach(btn => btn.classList.remove('active'));
-          sections.forEach(section => section.classList.remove('active'));
-          
-          // Add active class to clicked button and corresponding section
-          button.classList.add('active');
-          document.getElementById(targetSection).classList.add('active');
-        });
-      });
+/* ────────────────────────────────────────────────────
+   0. HELPER: parse and cache an image check
+   ──────────────────────────────────────────────────── */
+const imgCache = {};
+function imageExists(src) {
+  if (src in imgCache) return Promise.resolve(imgCache[src]);
+  return new Promise(res => {
+    const i = new Image();
+    i.onload = () => { imgCache[src] = true; res(true); };
+    i.onerror = () => { imgCache[src] = false; res(false); };
+    i.src = src;
+  });
+}
 
-      // Project filtering using event delegation so dynamically-created buttons work
-      const filterTabsContainer = document.getElementById('project-filter-tabs');
-      if (filterTabsContainer) {
-        filterTabsContainer.addEventListener('click', (e) => {
-          const button = e.target.closest('.filter-btn');
-          if (!button) return;
-          const filter = button.getAttribute('data-filter');
+function slugify(s) {
+  return (s || '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+}
 
-          // Remove active class from all filter buttons
-          const allBtns = filterTabsContainer.querySelectorAll('.filter-btn');
-          allBtns.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
+/* ────────────────────────────────────────────────────
+   1. THEME SYSTEM  (reads system pref by default)
+   ──────────────────────────────────────────────────── */
+const THEME_KEY = 'rg_theme_v3';
 
-          // Query current project cards (handles dynamically rendered cards)
-          const projectCards = document.querySelectorAll('.project-card');
-          projectCards.forEach(card => {
-            if (filter === 'all' || card.getAttribute('data-category') === filter) {
-              card.style.display = 'block';
-              card.style.animation = 'fadeIn 0.5s ease forwards';
-            } else {
-              card.style.display = 'none';
-            }
-          });
-        });
-      }
+function getSystemTheme() {
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
-      // Form submission
-      const contactForm = document.querySelector('.contact-form form');
-      contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(this);
-        const name = formData.get('name');
-        const email = formData.get('email');
-        const message = formData.get('message');
-        
-        // Simple validation
-        if (name && email && message) {
-          // Show success message
-          const button = this.querySelector('.btn-primary');
-          const originalText = button.innerHTML;
-          button.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-          button.style.background = 'linear-gradient(135deg, #00ff88 0%, #00cc6a 100%)';
-          
-          // Reset after 3 seconds
-          setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.background = '';
-            this.reset();
-          }, 3000);
-        }
-      });
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem(THEME_KEY, theme);
+  const isDark = theme === 'dark';
 
-      // Animate skill bars on scroll
-      const skillBars = document.querySelectorAll('.skill-fill');
-      const observerOptions = {
-        threshold: 0.3  ,
-        rootMargin: '0px 0px -50px 0px'
-      };
+  ['themeIcon'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.className = isDark ? 'fas fa-moon' : 'fas fa-sun';
+  });
 
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const skillBar = entry.target;
-            const width = skillBar.style.width;
-            skillBar.style.width = '0%';
-            setTimeout(() => {
-              skillBar.style.width = width;
-              skillBar.style.transition = 'width 1.5s ease-in-out';
-            }, 200);
-          }
-        });
-      }, observerOptions);
+  if (window._bgCanvas) window._bgCanvas.updateTheme(isDark);
+}
 
-      skillBars.forEach(bar => observer.observe(bar));
+function initTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  applyTheme(saved || getSystemTheme());
 
-      // Add smooth scrolling for better UX
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({
-              behavior: 'smooth',
-              block: 'start'
-            });
-          }
-        });
-      });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem(THEME_KEY)) applyTheme(e.matches ? 'dark' : 'light');
+  });
 
-      // Add typing animation to the title
-      const title = document.querySelector('.profile .title');
-      if (title) {
-        const text = title.textContent;
-        title.textContent = '';
-        let i = 0;
-        
-        function typeWriter() {
-          if (i < text.length) {
-            title.textContent += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 100);
-          }
-        }
-        
-        setTimeout(typeWriter, 1000);
-      }
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
+    const cur = document.documentElement.getAttribute('data-theme');
+    applyTheme(cur === 'dark' ? 'light' : 'dark');
+  });
+}
 
-      // Card hover interactions (no continuous float animation)
-      const cards = document.querySelectorAll('.card, .project-card, .service-card');
-      cards.forEach((card) => {
-        card.addEventListener('mouseenter', function() {
-          this.style.transform = 'translateY(-10px) scale(1.02)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-          this.style.transform = 'translateY(0) scale(1)';
-        });
-      });
+/* ────────────────────────────────────────────────────
+   2. CUSTOM CURSOR  (faster — 28% lag instead of 14%)
+   ──────────────────────────────────────────────────── */
+function initCursor() {
+  // Custom cursor removed — using default browser cursor
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (dot) dot.style.display = 'none';
+  if (ring) ring.style.display = 'none';
+}
+
+/* ────────────────────────────────────────────────────
+   3. CANVAS — node network, brighter dots & connections
+   ──────────────────────────────────────────────────── */
+function initCanvas() {
+  const canvas = document.getElementById('bgCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+  let W, H, nodes = [];
+
+  const N = 60;             // node count
+  const DIST = 170;         // max connection distance
+  const DOT_ALPHA_DARK = 0.6;
+  const DOT_ALPHA_LIGHT = 0.45;
+  const LINE_ALPHA_MAX_DARK = 0.28;
+  const LINE_ALPHA_MAX_LIGHT = 0.18;
+
+  function mkNode() {
+    return {
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - .5) * .45, vy: (Math.random() - .5) * .45,
+      r: Math.random() * 2 + .8,
+    };
+  }
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    nodes = Array.from({ length: N }, mkNode);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const aRGB = isDark ? '0,232,122' : '99,102,241';
+    const dotA = isDark ? DOT_ALPHA_DARK : DOT_ALPHA_LIGHT;
+    const lineMax = isDark ? LINE_ALPHA_MAX_DARK : LINE_ALPHA_MAX_LIGHT;
+
+    nodes.forEach(n => {
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
     });
 
-    // Add some additional CSS for animations
-    const additionalStyles = document.createElement('style');
-    additionalStyles.textContent = `
-      .contact-info-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-      }
-      
-      .contact-info-card .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-        padding: 1rem;
-        background: rgba(255, 255, 255, 0.03);
-        border-radius: 12px;
-        transition: all 0.3s ease;
-      }
-      
-      .contact-info-card .contact-item:hover {
-        background: rgba(255, 255, 255, 0.08);
-        transform: translateX(5px);
-      }
-      
-      .contact-info-card .contact-item i {
-        color: var(--accent);
-        font-size: 1.2rem;
-        width: 24px;
-      }
-      
-      .contact-info-card .contact-item h4 {
-        margin-bottom: 0.25rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-      
-      .contact-info-card .contact-item a,
-      .contact-info-card .contact-item span {
-        color: var(--text-secondary);
-        text-decoration: none;
-        font-size: 0.9rem;
-      }
-      
-      .contact-info-card .contact-item a:hover {
-        color: var(--accent);
-      }
-      
-      /* Floating animation removed — cards will respond only to hover */
-    `;
-    document.head.appendChild(additionalStyles);
-    
-    // Fetch and display GitHub repos in My Work section
-    async function getRepos(username) {
-      const response = await fetch(`https://api.github.com/users/${username}/repos`);
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      return await response.json();
-    }
-
-
-    async function fetchFirstIconFor(word) {
-      const endpoint = `https://api.iconify.design/search?query=${encodeURIComponent(word)}&limit=1`;
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error(`Search request failed with status ${response.status}`);
-      }
-      const data = await response.json();
-      if (data.icons && data.icons.length > 0) {
-        return `https://api.iconify.design/${data.icons[0]}.svg`;
-      } else {
-        // Fallback if no icons found
-        return `https://api.iconify.design/mdi:help-circle.svg`;
+    // Connections
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < DIST) {
+          ctx.strokeStyle = `rgba(${aRGB},${(1 - d / DIST) * lineMax})`;
+          ctx.lineWidth = .9;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
       }
     }
 
-    async function getLogoForRepo(repoName) {
-      const firstWord = repoName.split(/[-_\s]/)[0].toLowerCase();
-      try {
-      const iconUrl = await fetchFirstIconFor(firstWord);
-    // Use CSS mask to apply --accent color as the logo color
-    return `<span style="display:inline-block;width:56px;height:56px;background:var(--accent);border-radius:12px;box-shadow:0 0 8px 0 rgba(0,255,136,0.15);mask:url('${iconUrl}') center/contain no-repeat;-webkit-mask:url('${iconUrl}') center/contain no-repeat;"></span>`;
-      } catch {
-        return '<i class="fab fa-github"></i>';
-      }
-    }
+    // Dots
+    nodes.forEach(n => {
+      ctx.fillStyle = `rgba(${aRGB},${dotA})`;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
 
-    async function createRepoCard(repo) {
-      const logo = await getLogoForRepo(repo.name);
-      return `
-        <div class="blog-card">
-          <div class="blog-image" style="background: var(--gradient-card); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent);">
-            ${logo}
-          </div>
-          <div class="blog-content">
-            <div class="blog-meta">${repo.language ? repo.language : 'Repo'}</div>
-            <h3><a href="${repo.html_url}" target="_blank" style="color: var(--accent); text-decoration: none;">${repo.name}</a></h3>
-            <p class="blog-excerpt">${repo.description ? repo.description : ''}</p>
-            <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-muted);">
-              ★ ${repo.stargazers_count} &nbsp; ⑂ ${repo.forks_count}
-            </div>
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  resize(); draw();
+
+  window._bgCanvas = { updateTheme: d => { isDark = d; } };
+}
+
+/* ────────────────────────────────────────────────────
+   4. FLOATING TOP NAV  (built from config)
+   ──────────────────────────────────────────────────── */
+function buildTopNav() {
+  const pillsEl = document.getElementById('topnavPills');
+  const mobileEl = document.getElementById('mobileNav');
+  if (!pillsEl || !mobileEl) return;
+
+  // Update logo avatar from config
+  const logoAv = document.getElementById('logoAvatar');
+  if (logoAv && CONFIG_PERSONAL.avatar) logoAv.src = CONFIG_PERSONAL.avatar;
+
+  CONFIG_NAV.forEach((item, i) => {
+    // desktop pill
+    const btn = document.createElement('button');
+    btn.className = 'topnav-pill' + (i === 0 ? ' active' : '');
+    btn.dataset.section = item.id;
+    btn.textContent = item.label;
+    btn.addEventListener('click', () => switchSection(item.id));
+    pillsEl.appendChild(btn);
+
+    // mobile btn
+    const mb = document.createElement('button');
+    mb.className = 'mobile-nav-btn' + (i === 0 ? ' active' : '');
+    mb.dataset.section = item.id;
+    mb.innerHTML = `<i class="${item.icon}"></i><span>${item.label}</span>`;
+    mb.addEventListener('click', () => { switchSection(item.id); closeMobileMenu(); });
+    mobileEl.appendChild(mb);
+  });
+
+  // Hamburger toggle
+  const hbBtn = document.getElementById('hamburgerBtn');
+  hbBtn?.addEventListener('click', () => {
+    const open = mobileEl.classList.toggle('open');
+    hbBtn.setAttribute('aria-expanded', open);
+    mobileEl.setAttribute('aria-hidden', !open);
+  });
+
+  // Scroll: add .scrolled class to topnav
+  const nav = document.getElementById('topnav');
+  window.addEventListener('scroll', () => {
+    nav?.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+}
+
+function closeMobileMenu() {
+  const m = document.getElementById('mobileNav');
+  const h = document.getElementById('hamburgerBtn');
+  m?.classList.remove('open');
+  h?.setAttribute('aria-expanded', 'false');
+  m?.setAttribute('aria-hidden', 'true');
+}
+
+/* ────────────────────────────────────────────────────
+   5. SECTION SWITCHING
+   ──────────────────────────────────────────────────── */
+function switchSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.topnav-pill, .mobile-nav-btn').forEach(b => b.classList.remove('active'));
+
+  const sec = document.getElementById(id);
+  if (sec) sec.classList.add('active');
+  document.querySelectorAll(`[data-section="${id}"]`).forEach(b => b.classList.add('active'));
+
+  if (id === 'resume') animateSkillBars();
+  if (id === 'mywork' && !window._reposLoaded) { window._reposLoaded = true; renderRepos(); }
+
+  // Re-trigger reveal animations for newly visible elements
+  setTimeout(initReveal, 60);
+
+  // Close mobile menu if open
+  closeMobileMenu();
+  if (window.innerWidth <= 768) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.switchSection = switchSection;
+
+/* ────────────────────────────────────────────────────
+   6. HERO PARALLAX (card tilts with mouse in hero)
+   ──────────────────────────────────────────────────── */
+function initParallax() {
+  const hero = document.getElementById('heroBanner');
+  const card = document.getElementById('heroCard');
+  if (!hero || !card) return;
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const x = (e.clientX - r.left - r.width / 2) / (r.width / 2);
+    const y = (e.clientY - r.top - r.height / 2) / (r.height / 2);
+    card.style.transform = `perspective(800px) rotateX(${y * -8}deg) rotateY(${x * 10}deg) translateZ(18px)`;
+  });
+
+  hero.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .6s ease';
+    card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+    setTimeout(() => (card.style.transition = ''), 600);
+  });
+}
+
+/* ────────────────────────────────────────────────────
+   7. SERVICE CARD GLOW  — properly tracks mouse per-card
+   ──────────────────────────────────────────────────── */
+function initServiceGlow() {
+  document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--gx', x + 'px');
+      card.style.setProperty('--gy', y + 'px');
+    });
+  });
+}
+
+/* ────────────────────────────────────────────────────
+   8. 3D CARD TILT  (project cards + hero card)
+      Re-runs after renderProjects adds new DOM nodes.
+   ──────────────────────────────────────────────────── */
+function initTilt(scope) {
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  const root = scope || document;
+
+  root.querySelectorAll('.tilt-target').forEach(card => {
+    // Remove old listener to avoid duplicates
+    card._onTiltMove && card.removeEventListener('mousemove', card._onTiltMove);
+    card._onTiltLeave && card.removeEventListener('mouseleave', card._onTiltLeave);
+
+    card._onTiltMove = e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5;
+      const y = (e.clientY - r.top) / r.height - .5;
+      card.style.transform = `perspective(600px) rotateX(${-y * 8}deg) rotateY(${x * 10}deg) scale(1.02)`;
+    };
+    card._onTiltLeave = () => {
+      card.style.transition = 'transform .4s ease';
+      card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
+      setTimeout(() => (card.style.transition = ''), 400);
+    };
+
+    card.addEventListener('mousemove', card._onTiltMove);
+    card.addEventListener('mouseleave', card._onTiltLeave);
+  });
+}
+
+/* ────────────────────────────────────────────────────
+   9. TYPED ROLE
+   ──────────────────────────────────────────────────── */
+function initTyped() {
+  const el = document.getElementById('typedRole');
+  if (!el) return;
+  const roles = CONFIG_PERSONAL.roles || ['AI/ML Engineer'];
+  let ri = 0, ci = 0, del = false;
+
+  function tick() {
+    const word = roles[ri];
+    el.textContent = del ? word.slice(0, --ci) : word.slice(0, ++ci);
+    if (!del && ci === word.length) { del = true; setTimeout(tick, 1800); return; }
+    if (del && ci === 0) { del = false; ri = (ri + 1) % roles.length; }
+    setTimeout(tick, del ? 48 : 82);
+  }
+  setTimeout(tick, 600);
+}
+
+/* ────────────────────────────────────────────────────
+   10. STAT COUNTERS
+   ──────────────────────────────────────────────────── */
+function initCounters() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      obs.unobserve(e.target);
+      const target = +e.target.dataset.target;
+      let n = 0; const step = Math.ceil(target / 45);
+      const t = setInterval(() => { n = Math.min(n + step, target); e.target.textContent = n; if (n >= target) clearInterval(t); }, 28);
+    });
+  }, { threshold: .5 });
+  document.querySelectorAll('.stat-num').forEach(el => obs.observe(el));
+}
+
+/* ────────────────────────────────────────────────────
+   11. SCROLL REVEAL
+   ──────────────────────────────────────────────────── */
+function initReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = (i % 4) * .08 + 's';
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: .1 });
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
+}
+
+/* ────────────────────────────────────────────────────
+   12. SKILL BARS
+   ──────────────────────────────────────────────────── */
+let skillsDone = false;
+function animateSkillBars() {
+  if (skillsDone) return;
+  skillsDone = true;
+  document.querySelectorAll('.skill-fill').forEach(el => {
+    requestAnimationFrame(() => { el.style.width = el.dataset.width + '%'; });
+  });
+}
+
+/* ────────────────────────────────────────────────────
+   13. BUILD SIDEBAR FROM CONFIG
+   ──────────────────────────────────────────────────── */
+function buildSidebar() {
+  // Avatar
+  const img = document.getElementById('avatarImg');
+  if (img) img.src = CONFIG_PERSONAL.avatar;
+
+  // Name & location
+  const nm = document.getElementById('profileName');
+  if (nm) nm.textContent = CONFIG_PERSONAL.name;
+
+  const loc = document.getElementById('profileLocation');
+  if (loc) loc.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${CONFIG_PERSONAL.location}`;
+
+  // Contact nav
+  const cNav = document.getElementById('contactNav');
+  if (cNav) {
+    const rows = [
+      { icon: 'fas fa-envelope', val: CONFIG_PERSONAL.email, href: `mailto:${CONFIG_PERSONAL.email}` },
+      { icon: 'fas fa-phone', val: CONFIG_PERSONAL.phone, href: `tel:${CONFIG_PERSONAL.phone}` },
+      { icon: 'fas fa-calendar', val: CONFIG_PERSONAL.birthday, href: null },
+      { icon: 'fas fa-globe', val: CONFIG_PERSONAL.website, href: CONFIG_PERSONAL.website },
+    ];
+    cNav.innerHTML = rows.map(r => {
+      const tag = r.href ? `<a href="${r.href}" ${r.href.startsWith('http') ? 'target="_blank" rel="noopener"' : ''} class="contact-row">`
+        : `<div class="contact-row no-link">`;
+      const end = r.href ? '</a>' : '</div>';
+      return `${tag}<span class="contact-icon"><i class="${r.icon}"></i></span><span class="contact-value">${r.val}</span>${end}`;
+    }).join('');
+  }
+
+  // Socials
+  const sr = document.getElementById('socialsRow');
+  if (sr) {
+    sr.innerHTML = CONFIG_SOCIALS.map(s =>
+      `<a href="${s.url}" target="_blank" rel="noopener" class="social-pill" title="${s.label}"><i class="${s.icon}"></i></a>`
+    ).join('');
+  }
+}
+
+/* ────────────────────────────────────────────────────
+   14. ABOUT: stats + services
+   ──────────────────────────────────────────────────── */
+function buildAbout() {
+  // Stats
+  const sr = document.getElementById('statsRow');
+  if (sr) {
+    sr.innerHTML = CONFIG_STATS.map(s =>
+      `<div class="stat-card">
+         <div class="stat-value-row">
+           <span class="stat-num" data-target="${s.value}">0</span><span class="stat-plus">${s.suffix}</span>
+         </div>
+         <span class="stat-label">${s.label}</span>
+       </div>`
+    ).join('');
+    initCounters(); // observe newly added counters
+  }
+
+  // Services
+  const sg = document.getElementById('servicesGrid');
+  if (sg) {
+    sg.innerHTML = CONFIG_SERVICES.map(s =>
+      `<div class="service-card">
+         <div class="service-glow"></div>
+         <div class="service-icon-wrap"><i class="${s.icon}"></i></div>
+         <h4>${s.title}</h4>
+         <p>${s.desc}</p>
+       </div>`
+    ).join('');
+    initServiceGlow(); // attach per-card mousemove for glow
+  }
+}
+
+/* ────────────────────────────────────────────────────
+   15. RESUME: timeline, skills, tech stack
+   ──────────────────────────────────────────────────── */
+function buildResume() {
+  function tlHtml(items) {
+    return items.map(t =>
+      `<li class="tl-item">
+         <div class="tl-dot"></div>
+         <div class="tl-content">
+           <span class="tl-date">${t.date}</span>
+           <strong>${t.title}</strong>
+           <p>${t.body}</p>
+         </div>
+       </li>`
+    ).join('');
+  }
+
+  const edu = document.getElementById('educationList');
+  if (edu) edu.innerHTML = tlHtml(CONFIG_EDUCATION);
+
+  const exp = document.getElementById('experienceList');
+  if (exp) exp.innerHTML = tlHtml(CONFIG_EXPERIENCE);
+
+  // Skills
+  const sg = document.getElementById('skillsGrid');
+  if (sg) {
+    sg.innerHTML = CONFIG_SKILLS.map(group =>
+      `<div class="skill-group">
+         <span class="skill-group-label">${group.group}</span>
+         ${group.items.map(sk =>
+        `<div class="skill-row">
+              <div class="skill-meta-row"><span>${sk.name}</span><span class="skill-pct">${sk.width}%</span></div>
+              <div class="skill-track"><div class="skill-fill" data-width="${sk.width}"></div></div>
+            </div>`
+      ).join('')}
+       </div>`
+    ).join('');
+  }
+
+  // Tech stack
+  const tg = document.getElementById('techStackGroups');
+  if (tg) {
+    tg.innerHTML = CONFIG_TECH_STACK.map(g =>
+      `<div class="tech-group">
+         <span class="tech-group-label">${g.group}</span>
+         <div class="tech-chips">${g.chips.map(c => `<span class="chip">${c}</span>`).join('')}</div>
+       </div>`
+    ).join('');
+  }
+}
+
+/* ────────────────────────────────────────────────────
+   16. PROJECTS  (reads CONFIG_PROJECTS)
+   ──────────────────────────────────────────────────── */
+function buildProjectFilters() {
+  const bar = document.getElementById('projectFilterBar');
+  if (!bar) return;
+
+  const cats = [...new Set(CONFIG_PROJECTS.map(p => p.category))];
+
+  const all = document.createElement('button');
+  all.className = 'filter-btn active'; all.dataset.filter = 'all'; all.textContent = 'All';
+  bar.appendChild(all);
+
+  cats.forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'filter-btn'; b.dataset.filter = slugify(cat); b.textContent = cat;
+    bar.appendChild(b);
+  });
+
+  bar.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.proj-card').forEach(c => {
+      c.style.display = (f === 'all' || c.dataset.category === f) ? '' : 'none';
+    });
+  });
+}
+
+async function renderProjects() {
+  const grid = document.getElementById('myProjectsGrid');
+  if (!grid) return;
+
+  const cards = await Promise.all(CONFIG_PROJECTS.map(async p => {
+    const path = `assets/images/${p.cover}`;
+    const hasImg = p.cover ? await imageExists(path) : false;
+
+    const thumbHtml = hasImg
+      ? `<img src="${path}" alt="${p.name}" loading="lazy">`
+      : `<div class="proj-thumb-icon"><i class="${p.icon}"></i></div>`;
+
+    const ghBtn = p.github
+      ? `<a href="${p.github}" target="_blank" rel="noopener" class="proj-btn github" onclick="event.stopPropagation()">
+           <i class="fab fa-github"></i> GitHub
+         </a>`
+      : '';
+
+    const demoBtn = p.demo
+      ? `<a href="${p.demo}" target="_blank" rel="noopener" class="proj-btn demo" onclick="event.stopPropagation()">
+           <i class="fas fa-rocket"></i> Try it
+         </a>`
+      : '';
+
+    return `
+      <article class="proj-card" data-category="${slugify(p.category)}"
+        ${p.github ? `onclick="window.open('${p.github}','_blank','noopener')"` : ''} >
+        <div class="proj-thumb">
+          ${thumbHtml}
+          <span class="proj-cat-badge">${p.category}</span>
+        </div>
+        <div class="proj-body">
+          <div class="proj-name">${p.name}</div>
+          <p class="proj-desc">${p.description || ''}</p>
+          <div class="proj-actions">${ghBtn}${demoBtn}</div>
+        </div>
+      </article>`;
+  }));
+
+  grid.innerHTML = cards.join('');
+  initTilt(grid); // tilt on new cards
+}
+
+/* ────────────────────────────────────────────────────
+   17. GITHUB REPOS  (cached)
+   ──────────────────────────────────────────────────── */
+const GH_CACHE_K = 'rg_repos_v3';
+const GH_TTL = 60 * 60 * 1000;
+
+const LANG_ICONS = {
+  Python: 'fab fa-python', JavaScript: 'fab fa-js', TypeScript: 'fab fa-js',
+  HTML: 'fab fa-html5', CSS: 'fab fa-css3-alt', Java: 'fab fa-java',
+  'Jupyter Notebook': 'fas fa-book-open', 'C++': 'fas fa-code', C: 'fas fa-code',
+};
+
+async function fetchRepos() {
+  try {
+    const raw = localStorage.getItem(GH_CACHE_K);
+    if (raw) { const { ts, data } = JSON.parse(raw); if (Date.now() - ts < GH_TTL) return data; }
+  } catch (_) { }
+
+  const user = CONFIG_GITHUB_USER || 'raj-neelam';
+  const res = await fetch(`https://api.github.com/users/${user}/repos?per_page=100&sort=updated`);
+  if (!res.ok) throw new Error(`GH ${res.status}`);
+  const data = await res.json();
+  try { localStorage.setItem(GH_CACHE_K, JSON.stringify({ ts: Date.now(), data })); } catch (_) { }
+  return data;
+}
+
+async function renderRepos() {
+  const grid = document.getElementById('reposGrid');
+  if (!grid) return;
+
+  grid.innerHTML = `
+    <div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-2);">
+      <i class="fas fa-circle-notch fa-spin" style="font-size:1.5rem;color:var(--accent);"></i>
+      <p style="margin-top:1rem;font-size:.88rem;">Loading repositories…</p>
+    </div>`;
+
+  try {
+    const repos = await fetchRepos();
+    repos.sort((a, b) => (b.stargazers_count - a.stargazers_count) || a.name.localeCompare(b.name));
+    grid.innerHTML = repos.map(r => `
+      <article class="repo-card">
+        <div class="repo-icon"><i class="${LANG_ICONS[r.language] || 'fab fa-github'}"></i></div>
+        <div class="repo-body">
+          <div class="repo-lang">${r.language || 'Repo'}</div>
+          <a href="${r.html_url}" target="_blank" rel="noopener" class="repo-name">${r.name}</a>
+          ${r.description ? `<p class="repo-desc">${r.description}</p>` : ''}
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> ${r.stargazers_count}</span>
+            <span><i class="fas fa-code-fork"></i> ${r.forks_count}</span>
           </div>
         </div>
-      `;
-    }
-    // Dynamically scan assets/images/ for logo files and store in window.repoLogos
-    async function scanRepoLogos() {
-      // Try to fetch the directory listing (works if server allows it)
-      let files = [];
-      try {
-        const resp = await fetch('assets/images/');
-        if (resp.ok) {
-          const text = await resp.text();
-          // Parse for hrefs to images (works for Apache/nginx directory listing)
-          const matches = Array.from(text.matchAll(/href=["']([^"']+\.(?:png|jpg|svg))["']/gi));
-          files = matches.map(m => 'assets/images/' + m[1]);
-        }
-      } catch (e) {
-        // fallback: try some common names
-        files = [
-          'assets/images/linear-reg.jpg',
-          'assets/images/ludo_board.jpg',
-          'assets/images/mnist-min.png',
-          'assets/images/logo-1-color.png',
-          'assets/images/logo-2-color.png',
-          'assets/images/logo-3-color.png',
-          'assets/images/logo-4-color.png',
-          'assets/images/logo-5-color.png',
-          'assets/images/logo-6.png',
-          'assets/images/logo.svg',
-        ];
-      }
-      window.repoLogos = files;
-    }
+      </article>`).join('');
+  } catch (_) {
+    const u = CONFIG_GITHUB_USER || 'raj-neelam';
+    grid.innerHTML = `
+      <div style="text-align:center;padding:3rem;color:var(--text-2);">
+        <i class="fas fa-triangle-exclamation" style="font-size:1.5rem;color:#ff6b6b;"></i>
+        <p style="margin-top:1rem;">Could not load repos.
+          <a href="https://github.com/${u}" target="_blank" style="color:var(--accent);">View on GitHub →</a></p>
+      </div>`;
+  }
+}
 
-    async function loadRepos() {
-      const container = document.getElementById('github-repos');
-      try {
-        // Wait for repoLogos to be ready
-        if (!window.repoLogos) await scanRepoLogos();
-        const repos = await getRepos('raj-neelam');
-        // Fully sort repositories by stargazers_count (descending), then by name
-        repos.sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0) || a.name.localeCompare(b.name));
-        const cardHtmlArr = await Promise.all(repos.map(createRepoCard));
-        container.innerHTML = cardHtmlArr.join('');
-      } catch (err) {
-        container.innerHTML = `<div style=\"color: var(--accent); padding: 2rem;\">Could not load repositories.</div>`;
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', async function() {
-      await scanRepoLogos();
-      loadRepos();
-    });
-
-
-// Rising stars particle field: creates upward-moving glowing dots behind content
-class StarField {
-  constructor() {
-    this.container = document.getElementById('starsContainer');
-    if (!this.container) return;
-    this.stars = [];
-    this.maxStars = 50;
-    this.init();
+/* ────────────────────────────────────────────────────
+   18. CONTACT
+   ──────────────────────────────────────────────────── */
+function buildContact() {
+  // Info card
+  const card = document.getElementById('contactInfoCard');
+  if (card) {
+    const rows = [
+      { icon: 'fas fa-envelope', val: CONFIG_PERSONAL.email, href: `mailto:${CONFIG_PERSONAL.email}`, lbl: 'Email' },
+      { icon: 'fas fa-globe', val: CONFIG_PERSONAL.website, href: CONFIG_PERSONAL.website, lbl: 'Website' },
+      { icon: 'fab fa-linkedin-in', val: 'raj-neelam', href: 'https://www.linkedin.com/in/raj-neelam-80666920b/', lbl: 'LinkedIn' },
+      { icon: 'fab fa-x-twitter', val: '@RajNGaurav', href: 'https://twitter.com/RajNGaurav', lbl: 'Twitter' },
+    ];
+    card.innerHTML = rows.map(r =>
+      `<a href="${r.href}" target="_blank" rel="noopener" class="contact-info-row">
+         <span class="ci-icon"><i class="${r.icon}"></i></span>
+         <div><span class="ci-label">${r.lbl}</span><span class="ci-value">${r.val}</span></div>
+       </a>`
+    ).join('');
   }
 
-  init() {
-    this.createInitialStars();
-    // The stars recreate themselves when they finish their animation
-  }
+  // Map
+  const frame = document.getElementById('mapFrame');
+  if (frame && CONFIG_MAP_URL) frame.src = CONFIG_MAP_URL;
 
-  createInitialStars() {
-    for (let i = 0; i < this.maxStars; i++) {
+  // Form → opens Gmail compose
+  const form = document.getElementById('contactForm');
+  const btn = document.getElementById('submitBtn');
+  if (form && btn) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = document.getElementById('cName')?.value.trim() || '';
+      const email = document.getElementById('cEmail')?.value.trim() || '';
+      const message = document.getElementById('cMessage')?.value.trim() || '';
+
+      if (!name || !email || !message) return;
+
+      const firstName = name.split(' ')[0];
+      const subject = encodeURIComponent(`Connection - ${firstName}`);
+      const body = encodeURIComponent(
+        `Hi Raj,\n\n${message}\n\n---\nFrom: ${name}\nEmail: ${email}`
+      );
+      const to = encodeURIComponent(CONFIG_PERSONAL.email);
+
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${to}&su=${subject}&body=${body}`;
+      window.open(gmailUrl, '_blank', 'noopener');
+
+      // Visual feedback
+      const orig = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Opening Gmail…';
+      btn.disabled = true; btn.style.opacity = '.8';
       setTimeout(() => {
-        this.createStar(true);
-      }, Math.random() * 5000);
-    }
-  }
-
-  createStar(isInitial = false) {
-    const star = document.createElement('div');
-    star.className = 'star';
-
-    const sizes = ['small', 'medium', 'large', 'extra-large'];
-    const size = sizes[Math.floor(Math.random() * sizes.length)];
-    star.classList.add(size);
-
-    if (Math.random() < 0.3) star.classList.add('pulse');
-
-    const startX = Math.random() * 100;
-    star.style.left = startX + '%';
-
-    if (isInitial) {
-      const startY = Math.random() * 100;
-      star.style.top = startY + '%';
-    } else {
-      star.style.top = '100vh';
-    }
-
-    const moveY = -120 - Math.random() * 80; // -120 to -200 vh
-    const duration = 16 + Math.random() * 14; // 16-30s
-    star.style.animationDuration = duration + 's';
-    star.style.setProperty('--move-y', moveY + 'vh');
-    star.style.transform = 'translateY(0)';
-    star.style.animation = `rise ${duration}s linear infinite, move ${duration}s linear infinite`;
-
-    this.container.appendChild(star);
-    this.stars.push(star);
-
-    // Remove and recreate after duration
-    setTimeout(() => {
-      if (star && star.parentNode) {
-        star.parentNode.removeChild(star);
-        this.stars = this.stars.filter(s => s !== star);
-        this.createStar(false);
-      }
-    }, duration * 1000);
+        btn.innerHTML = orig; btn.disabled = false; btn.style.opacity = '';
+        form.reset();
+      }, 2500);
+    });
   }
 }
 
-// Inject vertical movement keyframes
-const _starStyle = document.createElement('style');
-_starStyle.textContent = `
-@keyframes move {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(var(--move-y, -120vh)); }
+/* ────────────────────────────────────────────────────
+   19. TOUCH TILT (mobile gesture)
+   ──────────────────────────────────────────────────── */
+function initTouchTilt() {
+  document.querySelectorAll('.tilt-target').forEach(card => {
+    card.addEventListener('touchmove', e => {
+      if (e.touches.length !== 1) return;
+      const t = e.touches[0], r = card.getBoundingClientRect();
+      const x = (t.clientX - r.left) / r.width - .5;
+      const y = (t.clientY - r.top) / r.height - .5;
+      card.style.transform = `perspective(600px) rotateX(${-y * 6}deg) rotateY(${x * 8}deg) scale(1.01)`;
+    }, { passive: true });
+    card.addEventListener('touchend', () => {
+      card.style.transition = 'transform .4s ease';
+      card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
+      setTimeout(() => (card.style.transition = ''), 400);
+    });
+  });
 }
-`;
-document.head.appendChild(_starStyle);
+
+/* ────────────────────────────────────────────────────
+   20. BOOT
+   ──────────────────────────────────────────────────── */
+// Theme initialises synchronously to avoid flash
+initTheme();
 
 document.addEventListener('DOMContentLoaded', () => {
-  try { new StarField(); } catch (e) { /* fail silently */ }
+  // Build dynamic content from config
+  buildSidebar();
+  buildAbout();
+  buildResume();
+  buildContact();
+  buildTopNav();
+  buildProjectFilters();
+  renderProjects();
+
+  // Interactions
+  initCanvas();
+  initCursor();
+  initParallax();
+  initTyped();
+  initReveal();
+  initTilt(document);
+  initTouchTilt();
 });
-  
