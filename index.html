@@ -39,28 +39,31 @@
     <div class="topnav-inner">
       <!-- Logo -->
       <a class="topnav-logo" href="#" onclick="switchSection('about');return false;">
-        <img id="logoAvatar" src="https://github.com/raj-neelam.png" alt="Raj Gaurav" class="logo-avatar">
+        <img id="logoAvatar" src="https://github.com/raj-neelam.png" alt="Raj" class="logo-avatar"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <span class="logo-initials-fb" style="display:none">RG</span>
         <span class="logo-name">Raj Gaurav</span>
       </a>
 
-      <!-- Nav pills -->
+      <!-- Desktop nav pills (hidden on mobile) -->
       <nav class="topnav-pills" id="topnavPills" role="navigation" aria-label="Page sections"></nav>
 
-      <!-- Controls -->
+      <!-- Mobile-only three-pill nav — SIBLING of logo and controls, fills centre -->
+      <div class="mobile-two-pills" id="mobileTwoPills" role="navigation" aria-label="Mobile navigation">
+        <button class="m2-pill active" id="m2About" onclick="switchMobileView('about')">About</button>
+        <button class="m2-pill" id="m2Projects" onclick="switchMobileView('projects')">Projects</button>
+        <button class="m2-pill" id="m2Contact" onclick="switchMobileView('contact')">Contact</button>
+      </div>
+
+      <!-- Controls (theme toggle only) -->
       <div class="topnav-controls">
         <button class="icon-btn" id="themeToggle" aria-label="Toggle theme" title="Switch light / dark">
           <i class="fas fa-moon" id="themeIcon"></i>
         </button>
-        <!-- Mobile hamburger -->
-        <button class="icon-btn hamburger-btn" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
-          <i class="fas fa-bars"></i>
-        </button>
       </div>
     </div>
-
-    <!-- Mobile dropdown nav -->
-    <nav class="mobile-nav" id="mobileNav" aria-hidden="true"></nav>
   </header>
+
 
   <!-- ════════════════════════════════════════════════
        LAYOUT: SIDEBAR + MAIN
@@ -204,9 +207,28 @@
 
       <!-- ── PROJECTS ── -->
       <section class="section" id="projects">
-        <div class="section-label">Projects</div>
-        <div class="filter-bar" id="projectFilterBar" role="group" aria-label="Filter projects"></div>
-        <div class="projects-grid" id="myProjectsGrid"></div>
+        <!-- Mobile toggle: Projects ↿ Repos (only visible on mobile) -->
+        <div class="mobile-proj-tabs" id="mobileProjTabs">
+          <button class="mpt-btn active" id="mptProjects" onclick="switchMobileProj('projects')">
+            <i class="fas fa-folder-open"></i> Projects
+          </button>
+          <button class="mpt-btn" id="mptRepos" onclick="switchMobileProj('repos')">
+            <i class="fab fa-github"></i> Repositories
+          </button>
+        </div>
+
+        <!-- Projects sub-view -->
+        <div id="projView">
+          <div class="section-label">Projects</div>
+          <div class="filter-bar" id="projectFilterBar" role="group" aria-label="Filter projects"></div>
+          <div class="projects-grid" id="myProjectsGrid"></div>
+        </div>
+
+        <!-- Repos sub-view (mobile Projects toggle: Repos) -->
+        <div id="reposMobileView" style="display:none">
+          <div class="section-label">Repositories</div>
+          <div class="repos-grid" id="reposGridMobile"></div>
+        </div>
       </section>
 
       <!-- ── MY WORK ── -->

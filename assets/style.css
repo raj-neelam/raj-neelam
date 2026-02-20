@@ -209,6 +209,39 @@ body {
   margin-left: auto;
 }
 
+/* ── mobile: 3-zone topnav (avatar | pills | theme) ──
+   mobile-two-pills is a direct child of topnav-inner so flex:1 centres it */
+@media (max-width:768px) {
+  .topnav-inner {
+    padding: 0 .75rem;
+    gap: .5rem;
+  }
+
+  .mobile-two-pills {
+    flex: 1;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    padding: 0;
+    gap: .25rem;
+  }
+}
+
+/* Logo initials fallback (shown if avatar image fails) */
+.logo-initials-fb {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: var(--grad);
+  color: #070b0f;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: .85rem;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 .topnav-pill {
   padding: .42rem 1rem;
   border-radius: 100px;
@@ -1786,13 +1819,24 @@ body {
     display: none;
   }
 
-  /* Top nav hamburger */
+  /* Top nav hamburger — hidden on mobile (replaced by two-pill nav) */
   .hamburger-btn {
-    display: flex;
+    display: none;
   }
 
+  /* Desktop pills hidden on mobile */
   .topnav-pills {
     display: none;
+  }
+
+  /* Logo name hidden on mobile; show only avatar */
+  .logo-name {
+    display: none;
+  }
+
+  /* Two-pill mobile nav — visible only on mobile */
+  .mobile-two-pills {
+    display: flex;
   }
 
   .topnav {
@@ -1833,6 +1877,10 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
   .contact-right {
     grid-template-columns: 1fr;
   }
@@ -1840,6 +1888,49 @@ body {
   .cursor-dot,
   .cursor-ring {
     display: none;
+  }
+
+  /* ── Mobile combined "About" view ─────────────────────
+     about = about+resume stacked
+     projects = #projects only
+     contact = #contact only
+     ──────────────────────────────────────────────────── */
+  .main-content[data-mobile="about"] #about,
+  .main-content[data-mobile="about"] #resume {
+    display: block !important;
+  }
+
+  .main-content[data-mobile="about"] #projects,
+  .main-content[data-mobile="about"] #mywork,
+  .main-content[data-mobile="about"] #contact {
+    display: none !important;
+  }
+
+  .main-content[data-mobile="projects"] #projects {
+    display: block !important;
+  }
+
+  .main-content[data-mobile="projects"] #about,
+  .main-content[data-mobile="projects"] #resume,
+  .main-content[data-mobile="projects"] #mywork,
+  .main-content[data-mobile="projects"] #contact {
+    display: none !important;
+  }
+
+  .main-content[data-mobile="contact"] #contact {
+    display: block !important;
+  }
+
+  .main-content[data-mobile="contact"] #about,
+  .main-content[data-mobile="contact"] #resume,
+  .main-content[data-mobile="contact"] #projects,
+  .main-content[data-mobile="contact"] #mywork {
+    display: none !important;
+  }
+
+  /* ── Mobile project sub-tabs toggle ─── */
+  .mobile-proj-tabs {
+    display: flex;
   }
 }
 
@@ -1855,4 +1946,103 @@ body {
   .hero-title {
     font-size: clamp(1.4rem, 6vw, 1.9rem);
   }
+}
+
+/* ════════════════════════════════════════════════
+   MOBILE TWO-PILL NAV (shown only on ≤768px)
+   ════════════════════════════════════════════════ */
+.mobile-two-pills {
+  display: none;
+  /* hidden on desktop */
+  align-items: center;
+  gap: 4px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 3px;
+}
+
+/* Shown on mobile — this rule MUST come after the display:none above */
+@media (max-width:768px) {
+  .mobile-two-pills {
+    display: flex !important;
+    flex: 1;
+    justify-content: center;
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 3px;
+    gap: 4px;
+  }
+}
+
+.m2-pill {
+  background: transparent;
+  border: none;
+  color: var(--text-2);
+  font-size: .76rem;
+  font-weight: 600;
+  padding: .3rem .65rem;
+  border-radius: 9px;
+  transition: background var(--tr), color var(--tr), transform var(--tr-b);
+  white-space: nowrap;
+}
+
+.m2-pill:hover {
+  color: var(--text-1);
+  background: var(--glass-h);
+}
+
+.m2-pill.active {
+  background: var(--grad);
+  color: #fff;
+  transform: none;
+}
+
+[data-theme="dark"] .m2-pill.active {
+  color: #070b0f;
+}
+
+/* ════════════════════════════════════════════════
+   MOBILE PROJECTS / REPOS TOGGLE
+   (inside #projects section, hidden on desktop)
+   ════════════════════════════════════════════════ */
+.mobile-proj-tabs {
+  display: none;
+  /* hidden on desktop; shown in @media above */
+  gap: 0;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 1.25rem;
+  width: 100%;
+}
+
+.mpt-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  background: transparent;
+  color: var(--text-2);
+  border: none;
+  font-size: .83rem;
+  font-weight: 600;
+  padding: .55rem 1rem;
+  border-radius: 10px;
+  transition: background var(--tr), color var(--tr);
+}
+
+.mpt-btn:hover {
+  color: var(--text-1);
+  background: var(--glass-h);
+}
+
+.mpt-btn.active {
+  background: var(--card-bg);
+  color: var(--accent);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-h);
 }

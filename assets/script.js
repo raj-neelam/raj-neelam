@@ -148,41 +148,24 @@ function initCanvas() {
 }
 
 /* ────────────────────────────────────────────────────
-   4. FLOATING TOP NAV  (built from config)
+   4. FLOATING TOP NAV  (desktop pills built from config)
    ──────────────────────────────────────────────────── */
 function buildTopNav() {
   const pillsEl = document.getElementById('topnavPills');
-  const mobileEl = document.getElementById('mobileNav');
-  if (!pillsEl || !mobileEl) return;
+  if (!pillsEl) return;
 
   // Update logo avatar from config
   const logoAv = document.getElementById('logoAvatar');
   if (logoAv && CONFIG_PERSONAL.avatar) logoAv.src = CONFIG_PERSONAL.avatar;
 
+  // Desktop pills only
   CONFIG_NAV.forEach((item, i) => {
-    // desktop pill
     const btn = document.createElement('button');
     btn.className = 'topnav-pill' + (i === 0 ? ' active' : '');
     btn.dataset.section = item.id;
     btn.textContent = item.label;
     btn.addEventListener('click', () => switchSection(item.id));
     pillsEl.appendChild(btn);
-
-    // mobile btn
-    const mb = document.createElement('button');
-    mb.className = 'mobile-nav-btn' + (i === 0 ? ' active' : '');
-    mb.dataset.section = item.id;
-    mb.innerHTML = `<i class="${item.icon}"></i><span>${item.label}</span>`;
-    mb.addEventListener('click', () => { switchSection(item.id); closeMobileMenu(); });
-    mobileEl.appendChild(mb);
-  });
-
-  // Hamburger toggle
-  const hbBtn = document.getElementById('hamburgerBtn');
-  hbBtn?.addEventListener('click', () => {
-    const open = mobileEl.classList.toggle('open');
-    hbBtn.setAttribute('aria-expanded', open);
-    mobileEl.setAttribute('aria-hidden', !open);
   });
 
   // Scroll: add .scrolled class to topnav
@@ -192,20 +175,67 @@ function buildTopNav() {
   }, { passive: true });
 }
 
-function closeMobileMenu() {
-  const m = document.getElementById('mobileNav');
-  const h = document.getElementById('hamburgerBtn');
-  m?.classList.remove('open');
-  h?.setAttribute('aria-expanded', 'false');
-  m?.setAttribute('aria-hidden', 'true');
+/* ────────────────────────────────────────────────────
+   4b. MOBILE VIEW SWITCHING
+   About = stacked about+resume+contact
+   Projects = projects section with sub-toggle
+   ──────────────────────────────────────────────────── */
+function isMobile() {
+  return window.matchMedia('(max-width:768px)').matches;
 }
 
+function switchMobileView(view) {
+  // Update pill active state
+  document.getElementById('m2About')?.classList.toggle('active', view === 'about');
+  document.getElementById('m2Projects')?.classList.toggle('active', view === 'projects');
+  document.getElementById('m2Contact')?.classList.toggle('active', view === 'contact');
+
+  // Set data attribute on main-content — CSS handles show/hide via selectors
+  const main = document.getElementById('mainContent');
+  if (main) main.setAttribute('data-mobile', view);
+
+  if (view === 'about') { animateSkillBars(); setTimeout(initReveal, 60); }
+  if (view === 'projects') { setTimeout(initReveal, 60); }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.switchMobileView = switchMobileView;
+
 /* ────────────────────────────────────────────────────
-   5. SECTION SWITCHING
+   4c. MOBILE PROJECTS SUB-TOGGLE (Projects ↔ Repos)
+   ──────────────────────────────────────────────────── */
+function switchMobileProj(view) {
+  document.getElementById('mptProjects')?.classList.toggle('active', view === 'projects');
+  document.getElementById('mptRepos')?.classList.toggle('active', view === 'repos');
+
+  const projView = document.getElementById('projView');
+  const reposView = document.getElementById('reposMobileView');
+
+  if (projView) projView.style.display = (view === 'projects') ? '' : 'none';
+  if (reposView) reposView.style.display = (view === 'repos') ? '' : 'none';
+
+  // Lazy-load repos once
+  if (view === 'repos' && !window._mobileReposLoaded) {
+    window._mobileReposLoaded = true;
+    renderReposMobile();
+  }
+}
+window.switchMobileProj = switchMobileProj;
+
+/* ────────────────────────────────────────────────────
+   5. SECTION SWITCHING  (desktop only)
+      On mobile, switchMobileView handles visibility.
    ──────────────────────────────────────────────────── */
 function switchSection(id) {
+  // On mobile, delegate to mobile view
+  if (isMobile()) {
+    if (['about', 'resume'].includes(id)) return switchMobileView('about');
+    if (['projects', 'mywork'].includes(id)) return switchMobileView('projects');
+    if (id === 'contact') return switchMobileView('contact');
+  }
+
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.topnav-pill, .mobile-nav-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.topnav-pill').forEach(b => b.classList.remove('active'));
 
   const sec = document.getElementById(id);
   if (sec) sec.classList.add('active');
@@ -216,10 +246,7 @@ function switchSection(id) {
 
   // Re-trigger reveal animations for newly visible elements
   setTimeout(initReveal, 60);
-
-  // Close mobile menu if open
-  closeMobileMenu();
-  if (window.innerWidth <= 768) window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 window.switchSection = switchSection;
 
@@ -677,6 +704,44 @@ function buildContact() {
 }
 
 /* ────────────────────────────────────────────────────
+   18b. MOBILE REPO RENDER (for Projects ➔ Repos toggle)
+   ──────────────────────────────────────────────────── */
+async function renderReposMobile() {
+  const grid = document.getElementById('reposGridMobile');
+  if (!grid) return;
+
+  grid.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--text-2);">
+    <i class="fas fa-circle-notch fa-spin" style="font-size:1.5rem;color:var(--accent);"></i>
+    <p style="margin-top:1rem;font-size:.88rem;">Loading repositories…</p>
+  </div>`;
+
+  try {
+    const repos = await fetchRepos();
+    repos.sort((a, b) => (b.stargazers_count - a.stargazers_count) || a.name.localeCompare(b.name));
+    grid.innerHTML = repos.map(r => `
+      <article class="repo-card">
+        <div class="repo-icon"><i class="${LANG_ICONS[r.language] || 'fab fa-github'}"></i></div>
+        <div class="repo-body">
+          <div class="repo-lang">${r.language || 'Repo'}</div>
+          <a href="${r.html_url}" target="_blank" rel="noopener" class="repo-name">${r.name}</a>
+          ${r.description ? `<p class="repo-desc">${r.description}</p>` : ''}
+          <div class="repo-stats">
+            <span><i class="fas fa-star"></i> ${r.stargazers_count}</span>
+            <span><i class="fas fa-code-fork"></i> ${r.forks_count}</span>
+          </div>
+        </div>
+      </article>`).join('');
+  } catch (_) {
+    const u = CONFIG_GITHUB_USER || 'raj-neelam';
+    grid.innerHTML = `<div style="text-align:center;padding:2rem;color:var(--text-2);">
+      <i class="fas fa-triangle-exclamation" style="font-size:1.5rem;color:#ff6b6b;"></i>
+      <p style="margin-top:1rem;">Could not load repos.
+        <a href="https://github.com/${u}" target="_blank" style="color:var(--accent);">View on GitHub →</a></p>
+    </div>`;
+  }
+}
+
+/* ────────────────────────────────────────────────────
    19. TOUCH TILT (mobile gesture)
    ──────────────────────────────────────────────────── */
 function initTouchTilt() {
@@ -720,4 +785,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initTilt(document);
   initTouchTilt();
+
+  // Set initial mobile view (About is default)
+  if (isMobile()) {
+    switchMobileView('about');
+  }
 });
