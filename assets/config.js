@@ -256,7 +256,7 @@ const CONFIG_PROJECTS = [
         icon: 'fas fa-chart-line',
         category: 'Transformers',
         github: 'https://github.com/raj-neelam/CharGPT',
-        demo: null,
+        demo: 'https://raj-neelam.github.io/CharGPT/',
         description: 'A custom-built GPT-like character language model demonstrating Transformer internals, efficient training, and story-style text generation. ',
     },
 ];
