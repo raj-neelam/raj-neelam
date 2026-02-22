@@ -179,6 +179,33 @@ const CONFIG_TECH_STACK = [
    ──────────────────────────────────────────────────── */
 const CONFIG_PROJECTS = [
     {
+        name: 'GPT2 Custom Implementation',
+        cover: 'GPT2.png',
+        icon: 'fas fa-chart-line',
+        category: 'Transformers',
+        github: 'https://github.com/raj-neelam/Custom-GPT2',
+        demo: null,
+        description: 'An efficient custom implementation of the GPT-2 model architecture using PyTorch. ',
+    },
+    {
+        name: 'Character GPT',
+        cover: 'CharGPT.png',
+        icon: 'fas fa-chart-line',
+        category: 'Transformers',
+        github: 'https://github.com/raj-neelam/CharGPT',
+        demo: 'https://raj-neelam.github.io/CharGPT/',
+        description: 'A custom-built GPT-like character language model demonstrating Transformer internals, efficient training, and story-style text generation. ',
+    },
+    {
+        name: 'Flappy Bird NEAT AI',
+        cover: 'Flappy-Bird-NEAT-AI-Trainer.png',
+        icon: 'fas fa-gamepad',
+        category: 'Reinforcement Learning',
+        github: 'https://github.com/raj-neelam/Flappy-Bird-NEAT-AI-Trainer',
+        demo: 'https://raj-neelam.github.io/Flappy-Bird-NEAT-AI-Trainer/',
+        description: 'Neuroevolution agent that learns to play Flappy Bird from scratch via NEAT.',
+    },
+    {
         name: 'Movie Recommendation System',
         cover: 'Movie-Recommendation-System.png',
         icon: 'fas fa-film',
@@ -195,15 +222,6 @@ const CONFIG_PROJECTS = [
         github: 'https://github.com/raj-neelam/Digit-Recognition',
         demo: 'https://raj-neelam.github.io/Digit-Recognition/',
         description: 'CNN trained on MNIST with a canvas web UI to draw and classify digits in real time.',
-    },
-    {
-        name: 'Flappy Bird NEAT AI',
-        cover: 'Flappy-Bird-NEAT-AI-Trainer.png',
-        icon: 'fas fa-gamepad',
-        category: 'Reinforcement Learning',
-        github: 'https://github.com/raj-neelam/Flappy-Bird-NEAT-AI-Trainer',
-        demo: 'https://raj-neelam.github.io/Flappy-Bird-NEAT-AI-Trainer/',
-        description: 'Neuroevolution agent that learns to play Flappy Bird from scratch via NEAT.',
     },
     {
         name: 'Neural Network Visualizer',
@@ -250,15 +268,7 @@ const CONFIG_PROJECTS = [
         demo: null,
         description: 'Language translation using progressively advanced models, from Seq2Seq RNNs to a custom coded Transformer. ',
     },
-    {
-        name: 'CharGPT',
-        cover: 'CharGPT.png',
-        icon: 'fas fa-chart-line',
-        category: 'Transformers',
-        github: 'https://github.com/raj-neelam/CharGPT',
-        demo: 'https://raj-neelam.github.io/CharGPT/',
-        description: 'A custom-built GPT-like character language model demonstrating Transformer internals, efficient training, and story-style text generation. ',
-    },
+    
 ];
 
 /* ── GitHub username for My Work section ── */
