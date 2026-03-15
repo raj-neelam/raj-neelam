@@ -184,7 +184,7 @@ const CONFIG_PROJECTS = [
         icon: 'fas fa-chart-line',
         category: 'Transformers',
         github: 'https://github.com/raj-neelam/Custom-GPT2',
-        demo: null,
+        demo: 'raj-neelam.github.io/Custom-GPT2/',
         description: 'An efficient custom implementation of the GPT-2 model architecture using PyTorch. ',
     },
     {
