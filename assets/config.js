@@ -30,7 +30,7 @@ const CONFIG_PERSONAL = {
 /* ── Socials ── */
 const CONFIG_SOCIALS = [
     { icon: 'fab fa-github', url: 'https://github.com/raj-neelam', label: 'GitHub' },
-    { icon: 'fab fa-linkedin-in', url: 'https://www.linkedin.com/in/raj-neelam-80666920b/', label: 'LinkedIn' },
+    { icon: 'fab fa-linkedin-in', url: 'www.linkedin.com/in/raj-neelam-gaurav', label: 'LinkedIn' },
     { icon: 'fab fa-x-twitter', url: 'https://twitter.com/RajNGaurav', label: 'Twitter' },
     { icon: 'fab fa-instagram', url: 'https://www.instagram.com/raj_gaurav_7_/', label: 'Instagram' },
     { icon: 'fab fa-discord', url: 'https://discord.com/users/rajneelamgaurav', label: 'Discord' },
