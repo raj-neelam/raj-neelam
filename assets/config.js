@@ -8,8 +8,8 @@
 
 /* ── Personal Info ── */
 const CONFIG_PERSONAL = {
-    name: 'Raj Gaurav',
-    tagline: 'AI/ML Engineer',          // shown under name
+    name: 'Raj Neelam Gaurav',
+    tagline: 'AI Researcher & ML Engineer',          // shown under name
     location: 'Roorkee, India',
     birthday: 'July 14, 2003',
     email: 'rajneelamgaurav@gmail.com',
@@ -18,7 +18,8 @@ const CONFIG_PERSONAL = {
     avatar: 'https://github.com/raj-neelam.png',
     // Roles cycled in the typewriter — add/remove freely
     roles: [
-        'AI/ML Engineer',
+        'AI Researcher',
+        'ML Engineer',
         'Deep Learning Dev',
         'Agentic AI Builder',
         'RL Researcher',
@@ -186,7 +187,7 @@ const CONFIG_PROJECTS = [
         github: 'https://github.com/raj-neelam/Custom-GPT2',
         demo: 'https://raj-neelam.github.io/Custom-GPT2/',
         description: 'An efficient custom implementation of the GPT-2 model architecture using PyTorch. ',
-    },
+    },  
     {
         name: 'Character GPT',
         cover: 'CharGPT.png',
