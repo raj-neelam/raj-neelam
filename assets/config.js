@@ -187,7 +187,16 @@ const CONFIG_PROJECTS = [
         github: 'https://github.com/raj-neelam/Custom-GPT2',
         demo: 'https://raj-neelam.github.io/Custom-GPT2/',
         description: 'An efficient custom implementation of the GPT-2 model architecture using PyTorch. ',
-    },  
+    },
+    {
+        name: 'Image to Caption Generation',
+        cover: 'ImageToCaption.png',
+        icon: 'fas fa-chart-line',
+        category: 'Transformers',
+        github: 'https://github.com/raj-neelam/Image-to-Caption-Generation',
+        demo: null,
+        description: 'Different neural network approaches for automatic image caption generation, including RNN-based models and modern transformer architectures. ',
+    },
     {
         name: 'Character GPT',
         cover: 'CharGPT.png',
@@ -269,7 +278,7 @@ const CONFIG_PROJECTS = [
         demo: null,
         description: 'Language translation using progressively advanced models, from Seq2Seq RNNs to a custom coded Transformer. ',
     },
-    
+
 ];
 
 /* ── GitHub username for My Work section ── */
