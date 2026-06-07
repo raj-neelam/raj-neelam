@@ -77,12 +77,12 @@ const CONFIG_EDUCATION = [
     {
         date: '2021 — 2023',
         title: 'DAV Dhanupura, Ara',
-        body: 'Intermediate — Science stream',
+        body: 'Intermediate (12th Grade) — Science stream',
     },
     {
         date: '2018 — 2021',
         title: 'DAV Pusauli, Kaimur',
-        body: 'Matriculation',
+        body: 'Matriculation (10th Grade)',
     },
 ];
 
@@ -91,22 +91,22 @@ const CONFIG_EXPERIENCE = [
     {
         date: '2026 — Present',
         title: 'Research Assistant',
-        body: 'Working under professors on research papers.',
+        body: 'Working under Professors on Research Papers.',
     },
     {
         date: '2025 — 2026',
-        title: 'Core Team — GDG',
-        body: 'Taught 100s about GenAI & cloud. Organised international hackathons.',
+        title: 'Core Team — Google Developer Group (GDG)',
+        body: 'Taught 100s about Generative AI & cloud. Organised international hackathons.',
     },
     {
         date: '2023 — 2024',
         title: 'Research Projects',
-        body: 'Deepfake detection, neural network experiments.',
+        body: 'Deepfake detection, Neural Network experiments.',
     },
     {
         date: '2021 — 2023',
         title: 'Self-learning Phase',
-        body: 'Python, C, ML, DL, cloud — self-taught foundation.',
+        body: 'Python, C, Machine Learning, Deep Learning, Cloud — self-taught foundation.',
     },
 ];
 
