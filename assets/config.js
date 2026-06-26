@@ -163,7 +163,7 @@ const CONFIG_TECH_STACK = [
     },
     {
         group: 'DevOps',
-        chips: ['Git', 'GitHub', 'Render', 'Vercel', 'Postman'],
+        chips: ['Git', 'GitHub', 'Render', 'Vercel', 'Postman', 'Docker', 'AWS', 'WSL'],
     },
 ];
 
@@ -195,7 +195,7 @@ const CONFIG_PROJECTS = [
         category: 'Transformers',
         github: 'https://github.com/raj-neelam/Image-Generation-Using-Diffution-model',
         demo: 'https://raj-neelam.github.io/Image-Generation-Using-Diffution-model/',
-        description: 'A deep learning model that generates realistic human faces by progressively denoising random Gaussian noise. Built using a U-Net backbone, the model learns the reverse diffusion process to synthesize high-quality images from pure noise through iterative denoising steps.',
+        description: 'A deep learning model that generates realistic human faces by progressively denoising random Gaussian noise.',
     },
     {
         name: 'Image to Caption Generation',
