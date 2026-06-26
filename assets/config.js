@@ -47,8 +47,8 @@ const CONFIG_NAV = [
 
 /* ── Stats (About section counters) ── */
 const CONFIG_STATS = [
-    { value: 5, suffix: '+', label: 'Years Learning' },
-    { value: 12, suffix: '+', label: 'Projects Built' },
+    { value: 6, suffix: '+', label: 'Years Learning' },
+    { value: 22, suffix: '+', label: 'Projects Built' },
     { value: 20, suffix: '+', label: 'Technologies' },
     { value: 600, suffix: '+', label: 'Students Taught' },
 ];
@@ -90,13 +90,13 @@ const CONFIG_EDUCATION = [
 const CONFIG_EXPERIENCE = [
     {
         date: '2026 — Present',
-        title: 'Research Assistant',
-        body: 'Working under Professors on Research Papers.',
+        title: 'Technical Associate @ Caelius Consulting',
+        body: 'Currently working on an AI-powered code reviewer and security analysis tool.',
     },
     {
         date: '2025 — 2026',
         title: 'Core Team — Google Developer Group (GDG)',
-        body: 'Taught 100s about Generative AI & cloud. Organised international hackathons.',
+        body: 'Taught 600+ students about Generative AI & cloud. Organised international hackathons.',
     },
     {
         date: '2023 — 2024',
@@ -189,11 +189,20 @@ const CONFIG_PROJECTS = [
         description: 'An efficient custom implementation of the GPT-2 model architecture using PyTorch. ',
     },
     {
+        name: 'Image Generation Using Diffusion Model',
+        cover: 'diffutionModel.png',
+        icon: 'fas fa-chart-line',
+        category: 'Transformers',
+        github: 'https://github.com/raj-neelam/Image-Generation-Using-Diffution-model',
+        demo: 'https://raj-neelam.github.io/Image-Generation-Using-Diffution-model/',
+        description: 'A deep learning model that generates realistic human faces by progressively denoising random Gaussian noise. Built using a U-Net backbone, the model learns the reverse diffusion process to synthesize high-quality images from pure noise through iterative denoising steps.',
+    },
+    {
         name: 'Image to Caption Generation',
         cover: 'ImageToCaption.png',
         icon: 'fas fa-chart-line',
         category: 'Transformers',
-        github: 'https://github.com/raj-neelam/Image-to-Caption-Generation',
+        github: 'https://github.com/raj-neelam/Caption-generation-with-transformers',
         demo: null,
         description: 'Different neural network approaches for automatic image caption generation, including RNN-based models and modern transformer architectures. ',
     },
